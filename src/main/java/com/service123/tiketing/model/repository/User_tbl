@@ -1,0 +1,19 @@
+create table USER_TBL(
+
+ID number primery key,
+
+NAME nvarchar2(20),
+
+FAMILY navarchar2(20),
+
+USERNAME nvarchar2(20),
+
+PASSWORD nvarchar2(20),
+
+ACTIVE number(1),
+
+DELETED number(1)
+);
+
+
+create SEQUNCE USER_SEQ start whit 1 INCREMENT by 1;
