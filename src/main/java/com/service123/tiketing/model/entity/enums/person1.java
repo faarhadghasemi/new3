@@ -1,4 +1,4 @@
 package com.service123.tiketing.model.entity.enums;
 
-public enum person {
+public enum person1 {
 }
