@@ -40,17 +40,29 @@ public class UserRepository implements RepositoryImpl<User> {
     public User edit(User user) throws Exception {
         connection= Jdbc.getJdbc().getConnection();
         statement=connection.prepareStatement(
-                "UPDATE USER_TBL SET NAME=?,FAMILY=?,USER_NAME=?,PASSWORD=?,description=?,ACTIVE=?,DELETED=? WHERE ID=?"
+                "SELECT * FROM USER_TBL WHERE ID=?"
         );
+        statement.setLong(1,user.getId());
+        ResultSet resultSet=statement.executeQuery();
 
-        statement.setString(1,user.getName());
-        statement.setString(2,user.getFamily());
-        statement.setString(3,user.getUserName());
-        statement.setString(4,user.getPassword());
-        statement.setString(5,user.getDescription());
-        statement.setBoolean(6,user.isActive());
-        statement.setBoolean(7,user.isDeleted());
-        statement.execute();
+        if (resultSet.next()) {
+            connection = Jdbc.getJdbc().getConnection();
+            statement = connection.prepareStatement(
+                    "UPDATE USER_TBL SET NAME=?,FAMILY=?,USER_NAME=?,PASSWORD=?,description=?,ACTIVE=?,DELETED=? WHERE ID=?"
+            );
+
+            statement.setString(1, user.getName());
+            statement.setString(2, user.getFamily());
+            statement.setString(3, user.getUserName());
+            statement.setString(4, user.getPassword());
+            statement.setString(5, user.getDescription());
+            statement.setBoolean(6, user.isActive());
+            statement.setBoolean(7, user.isDeleted());
+            statement.execute();
+        }else {
+            user=null;
+            throw new ContentNotFoundException("User Not Found");
+        }
         return user;
     }
 
@@ -60,6 +72,7 @@ public class UserRepository implements RepositoryImpl<User> {
         statement=connection.prepareStatement(
                 "SELECT * FROM USER_TBL WHERE ID=?"
         );
+        statement.setLong(1,id);
         ResultSet resultSet=statement.executeQuery();
         User user=null;
         if (resultSet.next()){
