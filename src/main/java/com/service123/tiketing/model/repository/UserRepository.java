@@ -15,10 +15,21 @@ public class UserRepository implements RepositoryImpl<User> {
 
     @Override
     public User save(User user) throws Exception {
+        user.setActive(true);
+        user.setDeleted(false);
+        user.setId(Jdbc.getJdbc().nextId("USER_SEQ"));
         connection= Jdbc.getJdbc().getConnection();
         statement=connection.prepareStatement(
-                "INSERT "
+                "INSERT INTO USER_TBL (ID,NAME,FAMILY,USER_NAME,PASSWORD,description,ACTIVE,DELETED) VALUES (?,?,?,?,?,?,?,?) "
         );
+        statement.setLong(1,user.getId());
+        statement.setString(2,user.getName());
+        statement.setString(3,user.getFamily());
+        statement.setString(4,user.getUserName());
+        statement.setString(5,user.getPassword());
+        statement.setString(6,user.getDescription());
+        statement.setBoolean(7,user.isActive());
+        statement.setBoolean(8,user.isDeleted());
         return user;
     }
 
