@@ -1,5 +1,6 @@
 package com.service123.tiketing.model.repository;
 
+import com.service123.tiketing.controller.exception.ContentNotFoundException;
 import com.service123.tiketing.model.common.Jdbc;
 import com.service123.tiketing.model.entity.User;
 
@@ -72,7 +73,7 @@ public class UserRepository implements RepositoryImpl<User> {
                     .description(resultSet.getString("DESCRIPTION"))
                     .active(resultSet.getBoolean("ACTIVE"))
                     .deleted(resultSet.getBoolean("DELETED"))
-                    .build()
+                    .build();
         }
         if (user!=null) {
             statement = connection.prepareStatement(
@@ -81,7 +82,7 @@ public class UserRepository implements RepositoryImpl<User> {
             statement.setLong(1, id);
             statement.execute();
         }else {
-            throw new ContentNotFoundException
+            throw new ContentNotFoundException("User Not Found");
         }
         return user;
     }
