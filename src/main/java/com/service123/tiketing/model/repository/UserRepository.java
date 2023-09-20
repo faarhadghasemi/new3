@@ -120,7 +120,7 @@ public class UserRepository implements RepositoryImpl<User> {
                     .active(resultSet.getBoolean("ACTIVE"))
                     .deleted(resultSet.getBoolean("DELETED"))
                     .build();
-            userList.add(user)
+            userList.add(user);
         }
         if (userList==null){
             throw new ContentNotFoundException("No User Found");
