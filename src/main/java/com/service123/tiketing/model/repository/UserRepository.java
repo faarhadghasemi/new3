@@ -102,12 +102,58 @@ public class UserRepository implements RepositoryImpl<User> {
 
     @Override
     public List<User> findAll() throws Exception {
-        return null;
+        connection= Jdbc.getJdbc().getConnection();
+        statement=connection.prepareStatement(
+                "SELECT * FROM USER_TBL"
+        );
+        ResultSet resultSet=statement.executeQuery();
+        List<User> userList=null;
+        while (resultSet.next()){
+            User user=User
+                    .builder()
+                    .id(resultSet.getLong("ID"))
+                    .name(resultSet.getString("NAME"))
+                    .family(resultSet.getString("FAMILY"))
+                    .userName(resultSet.getString("USER_NAME"))
+                    .password(resultSet.getString("PASSWORD"))
+                    .description(resultSet.getString("DESCRIPTION"))
+                    .active(resultSet.getBoolean("ACTIVE"))
+                    .deleted(resultSet.getBoolean("DELETED"))
+                    .build();
+            userList.add(user)
+        }
+        if (userList==null){
+            throw new ContentNotFoundException("No User Found");
+        }
+        return userList;
     }
 
     @Override
-    public User findById(long id) throws Exception {
-        return null;
+    public User findById(long id) throws Exception { connection= Jdbc.getJdbc().getConnection();
+        statement=connection.prepareStatement(
+                "SELECT * FROM USER_TBL WHERE ID=?"
+        );
+        statement.setLong(1,id);
+        ResultSet resultSet=statement.executeQuery();
+        User user=null;
+        while (resultSet.next()){
+            user=User
+                    .builder()
+                    .id(resultSet.getLong("ID"))
+                    .name(resultSet.getString("NAME"))
+                    .family(resultSet.getString("FAMILY"))
+                    .userName(resultSet.getString("USER_NAME"))
+                    .password(resultSet.getString("PASSWORD"))
+                    .description(resultSet.getString("DESCRIPTION"))
+                    .active(resultSet.getBoolean("ACTIVE"))
+                    .deleted(resultSet.getBoolean("DELETED"))
+                    .build();
+
+        }
+        if (user==null){
+            throw new ContentNotFoundException("No User Found");
+        }
+        return user;
     }
 
     @Override
