@@ -1,6 +1,7 @@
 package com.service123.tiketing.model.entity;
 
 import com.google.gson.Gson;
+import com.service123.tiketing.model.entity.enums.UserRoles;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -12,6 +13,7 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 public class User {
     private long id;
+    private UserRoles userRoles;
     private String name;
     private String family ;
     private String userName ;
