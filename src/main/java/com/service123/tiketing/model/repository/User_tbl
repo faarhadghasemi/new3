@@ -2,6 +2,8 @@ create table USER_TBL(
 
 ID number primery key,
 
+USER_ROLES varchar2(8)
+
 NAME nvarchar2(20),
 
 FAMILY navarchar2(20),
