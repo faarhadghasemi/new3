@@ -1,12 +1,12 @@
 create table USER_TBL(
 
-ID number primery key,
+ID number primary key,
 
 USER_ROLES varchar2(8)
 
 NAME nvarchar2(20),
 
-FAMILY navarchar2(20),
+FAMILY nvarchar2(20),
 
 USERNAME nvarchar2(20),
 
@@ -18,4 +18,4 @@ DELETED number(1)
 );
 
 
-create SEQUNCE USER_SEQ start whit 1 INCREMENT by 1;
+create SEQUENCE USER_SEQ start whit 1 INCREMENT by 1;
