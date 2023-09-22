@@ -15,17 +15,17 @@ public class User {
     private long id;
     private UserRoles userRoles;
     private String name;
-    private String family ;
-    private String userName ;
-    private String password ;
+    private String family;
+    private String userName;
+    private String password;
     private String description;
-    private boolean active ;
-    private boolean deleted ;
-
+    private boolean active;
+    private boolean deleted;
 
 
     @Override
     public String toString() {
+
         return new Gson().toJson(this);
     }
 }
