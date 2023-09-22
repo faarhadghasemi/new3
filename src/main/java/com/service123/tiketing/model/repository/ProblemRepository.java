@@ -3,16 +3,16 @@ package com.service123.tiketing.model.repository;
 import com.service123.tiketing.controller.exception.ContentNotFoundException;
 import com.service123.tiketing.model.common.Jdbc;
 import com.service123.tiketing.model.entity.Problem;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ProblemRepository implements RepositoryImpl<Problem> {
-
     private Connection connection;
     private PreparedStatement statement;
+
 
     public ProblemRepository() {
     }
@@ -63,22 +63,67 @@ public class ProblemRepository implements RepositoryImpl<Problem> {
         statement = connection.prepareStatement(
                 "SELECT * FROM PROBLEM_TBL WHERE id=?"
         );
-//        statement.setLong(1,problem.getId());
+        statement.setLong(1,problem.getId());
         ResultSet resultSet = statement.executeQuery();
+        Problem problem1=null;
+        if (resultSet.next()){
+            Problem.builder()
+                    .id(resultSet.getLong("id"))
+                    .describtion(resultSet.getString("description"))
+                    .build();
+        }
+        if(problem != null){
+            statement = connection.prepareStatement(
+                    "Update  PROBLEM_TBL set deleted=1 where id=?");
+            statement.setLong(1,problem.getId());
+            statement.execute();
+        }
+            else {
+                throw new ContentNotFoundException("problem not found");
+            }
 
-
-
-        return null;
+        return problem;
     }
 
     @Override
     public List<Problem> findAll() throws Exception {
-        return null;
+        Problem problem=null;
+        connection = Jdbc.getJdbc().getConnection();
+        statement = connection.prepareStatement(
+                "SELECT * FROM PROBLEM_TBL WHERE deleted=0"
+        );
+        ResultSet resultSet = statement.executeQuery();
+        List<Problem> problemList = new ArrayList<>();
+        if (resultSet.next()){
+            problem =  Problem.builder()
+                    .id(resultSet.getLong("id"))
+                    .describtion(resultSet.getString("description"))
+                    .build();
+            problemList.add(problem);
+        }
+        if(problemList.size() == 0)
+            throw new ContentNotFoundException("problem noy found");
+        return problemList;
     }
 
     @Override
     public Problem findById(long id) throws Exception {
-        return null;
+
+        connection = Jdbc.getJdbc().getConnection();
+        statement = connection.prepareStatement("select  * from PROBLEM_TBL where deleted=0 and  id=?");
+        statement.setLong(1,id);
+        ResultSet resultSet = statement.executeQuery();
+        Problem problem=null;
+        while (resultSet.next()){
+            problem =Problem.builder()
+                    .id(resultSet.getLong("id"))
+                    .describtion(resultSet.getString("description"))
+                    .build();
+        }
+        if (problem == null){
+            throw new ContentNotFoundException("problem not found");
+        }
+        return problem;
     }
 
     @Override
