@@ -1,4 +1,4 @@
 package com.service123.tiketing.controller.servlet;
 
-public class Servlet {
+public class UserServlet {
 }
