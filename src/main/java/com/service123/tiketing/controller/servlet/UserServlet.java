@@ -31,7 +31,6 @@ public class UserServlet extends HttpServlet {
                     .name(request.getParameter("name"))
                     .family(request.getParameter("family"))
                     .userName(request.getParameter("username"))
-                    .password(request.getParameter("password"))
                     .description(request.getParameter("description"))
                     .deleted(false)
                     .build()
