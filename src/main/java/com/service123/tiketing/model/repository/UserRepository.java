@@ -3,12 +3,10 @@ package com.service123.tiketing.model.repository;
 import com.service123.tiketing.controller.exception.ContentNotFoundException;
 import com.service123.tiketing.model.common.Jdbc;
 import com.service123.tiketing.model.entity.User;
-import com.service123.tiketing.model.entity.enums.UserRoles;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.List;
 
 public class UserRepository implements RepositoryImpl<User> {
@@ -131,6 +129,18 @@ public class UserRepository implements RepositoryImpl<User> {
             throw new ContentNotFoundException("No User Found");
         }
         return userList;
+    }
+
+    @Override
+    public boolean isDuplicated(User user) throws Exception {
+        connection= Jdbc.getJdbc().getConnection();
+        statement=connection.prepareStatement(
+                "SELECT COUNT(USER_NAME) AS C FROM USER_TBL  WHERE USER_NAME =? AND DELETED=0"
+        );
+        statement.setString(1, user.getUserName());
+        ResultSet resultSet=statement.executeQuery();
+        int count=resultSet.getInt("C");
+        return (count==0)?false:true;
     }
 
     @Override
