@@ -2,6 +2,7 @@ package com.service123.tiketing.controller.servlet;
 
 import com.service123.tiketing.model.entity.User;
 import com.service123.tiketing.model.entity.enums.ActionType;
+import com.service123.tiketing.model.entity.enums.UserRoles;
 import com.service123.tiketing.model.repository.LogDa;
 import com.service123.tiketing.model.service.UserService;
 
@@ -23,11 +24,12 @@ public class UserServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
        ActionType action=null;
        String data=null;
+        UserRoles userRoles;
         try {
             data= UserService.getService().save(User
                     .builder()
 //                    .id()
-//                    .userRoles(request.getParameter("roles"))
+//                    .userRoles(request.getParameter("userRoles"))
                     .name(request.getParameter("name"))
                     .family(request.getParameter("family"))
                     .userName(request.getParameter("username"))

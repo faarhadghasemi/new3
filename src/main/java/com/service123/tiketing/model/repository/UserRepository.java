@@ -3,12 +3,10 @@ package com.service123.tiketing.model.repository;
 import com.service123.tiketing.controller.exception.ContentNotFoundException;
 import com.service123.tiketing.model.common.Jdbc;
 import com.service123.tiketing.model.entity.User;
-import com.service123.tiketing.model.entity.enums.UserRoles;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.List;
 
 public class UserRepository implements RepositoryImpl<User> {
@@ -134,6 +132,18 @@ public class UserRepository implements RepositoryImpl<User> {
     }
 
     @Override
+    public boolean isDuplicated(User user) throws Exception {
+        connection= Jdbc.getJdbc().getConnection();
+        statement=connection.prepareStatement(
+                "SELECT COUNT(USER_NAME) AS C FROM USER_TBL  WHERE USER_NAME =? AND DELETED=0"
+        );
+        statement.setString(1, user.getUserName());
+        ResultSet resultSet=statement.executeQuery();
+        int count=resultSet.getInt("C");
+        return (count==0)?false:true;
+    }
+
+    @Override
     public User findById(long id) throws Exception { connection= Jdbc.getJdbc().getConnection();
         statement=connection.prepareStatement(
                 "SELECT * FROM USER_TBL WHERE ID=? AND DELETED=0"
@@ -161,6 +171,38 @@ public class UserRepository implements RepositoryImpl<User> {
         }
         return user;
     }
+
+    @Override
+    public User login(User user) throws Exception {
+        connection= Jdbc.getJdbc().getConnection();
+        statement=connection.prepareStatement(
+                "SELECT * FROM USER_TBL WHERE USER_NAME=? AND PASSWORD=?"
+        );
+        statement.setString(1, user.getUserName());
+        statement.setString(2, user.getPassword());
+        ResultSet resultSet=statement.executeQuery();
+         user=null;
+        if (resultSet.next()){
+            user=User
+                    .builder()
+                    .id(resultSet.getLong("ID"))
+                    //todo : .userRoles(UserRoles.valueOf(resultSet.getString("User_Role")))
+                    .name(resultSet.getString("NAME"))
+                    .family(resultSet.getString("FAMILY"))
+                    .userName(resultSet.getString("USER_NAME"))
+                    .password(resultSet.getString("PASSWORD"))
+                    .description(resultSet.getString("DESCRIPTION"))
+                    .active(resultSet.getBoolean("ACTIVE"))
+                    .deleted(resultSet.getBoolean("DELETED"))
+                    .build();
+
+        }
+        if (user==null){
+            throw new ContentNotFoundException("No User Found");
+        }
+        return user;
+    }
+
 
     @Override
     public void close() throws Exception {
