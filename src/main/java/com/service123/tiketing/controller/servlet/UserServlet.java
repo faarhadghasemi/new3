@@ -16,8 +16,14 @@ import java.io.IOException;
 @WebServlet(urlPatterns = "/user.do")
 public class UserServlet extends HttpServlet {
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        super.doGet(req, resp);//findall;
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+//        try {
+//            request.getSession().setAttribute("userList",UserService.getService().findAll());
+//        } catch (Exception e) {
+//            throw new RuntimeException(e);
+            response.sendRedirect("/index.jsp");
+//        }
+
     }
 
     @Override
