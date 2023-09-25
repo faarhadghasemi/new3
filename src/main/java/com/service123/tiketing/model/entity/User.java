@@ -20,6 +20,7 @@ public class User {
     private String password;
     private String description;
     private boolean isDuplicated;
+    private String log;
     private boolean active;
     private boolean deleted;
 

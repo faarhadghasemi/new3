@@ -12,17 +12,17 @@ import java.time.LocalDateTime;
 public class LogDa {
     public static void log(ActionType actionType,String data,long userId) throws SQLException{
         Connection connection= Jdbc.getJdbc().getConnection();
-        PreparedStatement preparedStatement= connection.prepareStatement(
+        PreparedStatement statement= connection.prepareStatement(
                 "INSERT  INTO LOG_TBL(ID,ACTION,DATA,DATE_TIME,USER_ID) VALUES  (LOG_SEQ.NEXTVAL,?,?,?,?)"
         );
-        preparedStatement.setString(1,actionType.name());
-        preparedStatement.setString(2,data);
+        statement.setString(1,actionType.name());
+        statement.setString(2,data);
         Timestamp timestamp=Timestamp.valueOf(LocalDateTime.now());
-        preparedStatement.setTimestamp(3,timestamp );
-        preparedStatement.setLong(4,userId);
-        preparedStatement.execute();
+        statement.setTimestamp(3,timestamp );
+        statement.setLong(4,userId);
+        statement.execute();
         System.out.printf("%s - [%s] - Data : %s - By User %s",timestamp,actionType.name(),data,userId);
-        preparedStatement.close();
+        statement.close();
         connection.close();
     }
 }

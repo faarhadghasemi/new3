@@ -19,9 +19,15 @@ public class UserService implements ServiceImpl<User> {
     @Override
     public User save(User user) throws Exception {
         try(UserRepository repository = new UserRepository()){
-            return repository.save(user);
+//            if (! repository.isDuplicated(user.getUserName())) {
+                return repository.save(user);
+//            }else {
+                //todo: throw exception
+//                System.out.println("Duplicated UserName");
+//                return null;
+            }
         }
-    }
+//    }
 
     @Override
     public User edit(User user) throws Exception {

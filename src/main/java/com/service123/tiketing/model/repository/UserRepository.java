@@ -173,6 +173,38 @@ public class UserRepository implements RepositoryImpl<User> {
     }
 
     @Override
+    public User login(User user) throws Exception {
+        connection= Jdbc.getJdbc().getConnection();
+        statement=connection.prepareStatement(
+                "SELECT * FROM USER_TBL WHERE USER_NAME=? AND PASSWORD=?"
+        );
+        statement.setString(1, user.getUserName());
+        statement.setString(2, user.getPassword());
+        ResultSet resultSet=statement.executeQuery();
+         user=null;
+        if (resultSet.next()){
+            user=User
+                    .builder()
+                    .id(resultSet.getLong("ID"))
+                    //todo : .userRoles(UserRoles.valueOf(resultSet.getString("User_Role")))
+                    .name(resultSet.getString("NAME"))
+                    .family(resultSet.getString("FAMILY"))
+                    .userName(resultSet.getString("USER_NAME"))
+                    .password(resultSet.getString("PASSWORD"))
+                    .description(resultSet.getString("DESCRIPTION"))
+                    .active(resultSet.getBoolean("ACTIVE"))
+                    .deleted(resultSet.getBoolean("DELETED"))
+                    .build();
+
+        }
+        if (user==null){
+            throw new ContentNotFoundException("No User Found");
+        }
+        return user;
+    }
+
+
+    @Override
     public void close() throws Exception {
         statement.close();
         connection.close();
