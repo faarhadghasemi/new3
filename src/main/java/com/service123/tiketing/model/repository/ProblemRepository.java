@@ -107,6 +107,11 @@ public class ProblemRepository implements RepositoryImpl<Problem> {
     }
 
     @Override
+    public boolean isDuplicated(Problem problem) throws Exception {
+        return false;
+    }
+
+    @Override
     public Problem findById(long id) throws Exception {
 
         connection = Jdbc.getJdbc().getConnection();
@@ -124,6 +129,11 @@ public class ProblemRepository implements RepositoryImpl<Problem> {
             throw new ContentNotFoundException("problem not found");
         }
         return problem;
+    }
+
+    @Override
+    public Problem login(Problem problem) throws Exception {
+        return null;
     }
 
     @Override
