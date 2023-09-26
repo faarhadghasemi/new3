@@ -16,8 +16,14 @@ import java.io.IOException;
 @WebServlet(urlPatterns = "/user.do")
 public class UserServlet extends HttpServlet {
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        super.doGet(req, resp);//findall;
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+//        try {
+//            request.getSession().setAttribute("userList",UserService.getService().findAll());
+//        } catch (Exception e) {
+//            throw new RuntimeException(e);
+            response.sendRedirect("/userindex.jsp");
+//        }
+
     }
 
     @Override
@@ -29,7 +35,7 @@ public class UserServlet extends HttpServlet {
             data= UserService.getService().save(User
                     .builder()
 //                    .id()
-//                    .userRoles(request.getParameter("userRoles"))
+                    .userRoles(UserRoles.valueOf(request.getParameter("userRoles")))
                     .name(request.getParameter("name"))
                     .family(request.getParameter("family"))
                     .userName(request.getParameter("username"))
@@ -46,7 +52,7 @@ public class UserServlet extends HttpServlet {
                 System.out.println("ERROR CONNECTING LOG SERVER");
             }
         }
-        response.sendRedirect("/userindext.jsp");
+        response.sendRedirect("/userindex.jsp");
     }//:SAVE METHOD;
 
     @Override

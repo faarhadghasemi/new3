@@ -139,6 +139,7 @@ public class UserRepository implements RepositoryImpl<User> {
         );
         statement.setString(1, user.getUserName());
         ResultSet resultSet=statement.executeQuery();
+        resultSet.next();
         int count=resultSet.getInt("C");
         return (count==0)?false:true;
     }
