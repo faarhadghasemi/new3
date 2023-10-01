@@ -42,6 +42,7 @@ public class ProblemServlet extends HttpServlet {
         List<Problem> Problemlist = new ArrayList<>();
         try {
             req.setAttribute("problem",Problemlist );
+            action=ActionType.FOND;
         }
         catch (Exception e){
             data = e.getMessage();
@@ -57,7 +58,10 @@ public class ProblemServlet extends HttpServlet {
         try {
            data = String.valueOf(ProblemService.getProblemService().edit(
                     Problem.builder().id(Long.parseLong(req.getParameter("id")))
-                            .describtion(req.getParameter("describtion")).deleted(false).build()));
+                            .describtion(req.getParameter("describtion"))
+                            .deleted(false)
+                            .build()));
+                             action = ActionType.EDIT;
         }
         catch (Exception e){
             data = e.getMessage();
@@ -70,10 +74,13 @@ public class ProblemServlet extends HttpServlet {
         ActionType action = null;
         String data = null;
         try {
-            Problem problem = ProblemService.getProblemService().remove(Long.parseLong(req.getParameter("id")));
+            Problem problem = ProblemService.getProblemService()
+                    .remove(Long.parseLong(req.getParameter("id")));
+            action =ActionType.REMOVE;
+
         } catch (Exception e){
             data = e.getMessage();
-            action = ActionType.REMOVE;
+            action = ActionType.ERROR;
 
         }
     }
