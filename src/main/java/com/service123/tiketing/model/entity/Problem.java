@@ -1,6 +1,7 @@
 package com.service123.tiketing.model.entity;
 
 import com.google.gson.Gson;
+import com.service123.tiketing.model.entity.enums.ProblemStatus;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -15,12 +16,14 @@ import java.time.LocalDate;
 
 public class Problem {
     private long id;
-    private String describtion;
-    private LocalDate datetime;
+    private Long parentId;
+    private String description;
+    private LocalDate dateTime;
+    private User sender;
+    private User receiver;
+    private String answer;
+    private ProblemStatus status;
     private boolean deleted;
-
-
-
 
 
     @Override

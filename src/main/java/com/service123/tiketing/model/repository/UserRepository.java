@@ -131,13 +131,12 @@ public class UserRepository implements RepositoryImpl<User> {
         return userList;
     }
 
-    @Override
-    public boolean isDuplicated(User user) throws Exception {
+    public boolean isDuplicated(String userName) throws Exception {
         connection= Jdbc.getJdbc().getConnection();
         statement=connection.prepareStatement(
-                "SELECT COUNT(USER_NAME) AS C FROM USER_TBL  WHERE USER_NAME =? AND DELETED=0"
+                "SELECT COUNT(USER_NAME) AS C FROM USER_TBL  WHERE USER_NAME =?"
         );
-        statement.setString(1, user.getUserName());
+        statement.setString(1, userName);
         ResultSet resultSet=statement.executeQuery();
         resultSet.next();
         int count=resultSet.getInt("C");
@@ -173,7 +172,6 @@ public class UserRepository implements RepositoryImpl<User> {
         return user;
     }
 
-    @Override
     public User login(User user) throws Exception {
         connection= Jdbc.getJdbc().getConnection();
         statement=connection.prepareStatement(

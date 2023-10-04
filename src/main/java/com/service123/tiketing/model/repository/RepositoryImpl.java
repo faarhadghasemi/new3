@@ -9,8 +9,6 @@ public interface RepositoryImpl<T> extends AutoCloseable {
     T edit(T t) throws Exception;
     T remove(long id) throws Exception;
     List<T> findAll() throws Exception;
-    boolean isDuplicated(T t)throws Exception;
     T findById(long id) throws Exception;
-    T login(T t) throws Exception;
 
 }

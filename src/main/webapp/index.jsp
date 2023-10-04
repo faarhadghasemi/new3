@@ -5,7 +5,9 @@
 </head>
 <body>
 <h1>Main Page</h1>
-<a href="/login.jsp" >SignIn/SignUp</a>
+<a href="/login.html" >SignIn/SignUp</a>
+<br><br>
+<a href="/problem.jsp" >Problem</a>
 
 </body>
 </html>

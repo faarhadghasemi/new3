@@ -25,7 +25,7 @@ public class ProblemRepository implements RepositoryImpl<Problem> {
                 "INSERT INTO PROBLEM_TBL values id=?,describtion=?,deleted=?"
         );
         statement.setLong(1, problem.getId());
-        statement.setString(2, problem.getDescribtion());
+        statement.setString(2, problem.getDescription());
         statement.setBoolean(3, problem.isDeleted());
         statement.execute();
 
@@ -47,7 +47,7 @@ public class ProblemRepository implements RepositoryImpl<Problem> {
                     "Update PROBLEM_TBL set id=?,describtion=? and deleted=0"
             );
             statement.setLong(1, problem.getId());
-            statement.setString(2, problem.getDescribtion());
+            statement.setString(2, problem.getDescription());
         } else {
             problem = null;
             throw new ContentNotFoundException("problem  Not Found");
@@ -69,7 +69,7 @@ public class ProblemRepository implements RepositoryImpl<Problem> {
         if (resultSet.next()){
             Problem.builder()
                     .id(resultSet.getLong("id"))
-                    .describtion(resultSet.getString("description"))
+                    .description(resultSet.getString("description"))
                     .build();
         }
         if(problem != null){
@@ -97,7 +97,7 @@ public class ProblemRepository implements RepositoryImpl<Problem> {
         if (resultSet.next()){
             problem =  Problem.builder()
                     .id(resultSet.getLong("id"))
-                    .describtion(resultSet.getString("description"))
+                    .description(resultSet.getString("description"))
                     .build();
             problemList.add(problem);
         }
@@ -106,7 +106,6 @@ public class ProblemRepository implements RepositoryImpl<Problem> {
         return problemList;
     }
 
-    @Override
     public boolean isDuplicated(Problem problem) throws Exception {
         return false;
     }
@@ -122,7 +121,7 @@ public class ProblemRepository implements RepositoryImpl<Problem> {
         while (resultSet.next()){
             problem =Problem.builder()
                     .id(resultSet.getLong("id"))
-                    .describtion(resultSet.getString("description"))
+                    .description(resultSet.getString("description"))
                     .build();
         }
         if (problem == null){
@@ -131,7 +130,6 @@ public class ProblemRepository implements RepositoryImpl<Problem> {
         return problem;
     }
 
-    @Override
     public Problem login(Problem problem) throws Exception {
         return null;
     }

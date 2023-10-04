@@ -38,6 +38,7 @@ public class UserServlet extends HttpServlet {
        ActionType action=null;
        String data=null;
         UserRoles userRoles;
+
         try {
             data= UserService.getService().save(User
                     .builder()
@@ -51,6 +52,7 @@ public class UserServlet extends HttpServlet {
                     .build()
             ).toString();
             action= ActionType.SAVE;
+
         }catch (Exception e){
             data=e.getMessage();
             action=ActionType.ERROR;

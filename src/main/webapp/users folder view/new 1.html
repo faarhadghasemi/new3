@@ -23,10 +23,10 @@
    <div class="myform">
         <form action="/user.do" method="post">
 		<label>userRoles:</label>
-		<select>
-		<option>admin</option>
-		<option>customer</option>
-		<option>employee</option>
+		<select name="userRoles">
+		<option value="admin">admin</option>
+		<option value="customer">customer</option>
+		<option value="employee"> employee</option>
 		</select>
         <input type="text" name="name" placeholder="name">
         <input type="text" name="family" placeholder="Family">
@@ -34,7 +34,8 @@
         <input type="password" name="password" placeholder="password">
          <input type="submit" value="save">
         </form>
-   
+
+
    </div>
 </div>
 
