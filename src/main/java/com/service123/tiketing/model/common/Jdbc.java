@@ -1,10 +1,8 @@
-
+package com.service123.tiketing.model.common;
 
 import java.sql.Connection;
 import java.sql.SQLException;
-
-package com.service123.tiketing.model.common;
-
+import lombok.Getter;
 import org.apache.commons.dbcp2.BasicDataSource;
 
 import java.sql.Connection;
@@ -13,15 +11,13 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class Jdbc {
-    private static  Jdbc jdbc=new Jdbc();
-    private static  BasicDataSource basicDataSource=new BasicDataSource();
+    @Getter
+    private static final Jdbc jdbc=new Jdbc();
+    private static final BasicDataSource basicDataSource=new BasicDataSource();
 
     private Jdbc() {
     }
 
-    public static Jdbc getJdbc() {
-        return jdbc;
-    }
     public Connection getConnection() throws SQLException {
         basicDataSource.setDriverClassName("oracle.jdbc.driver.OracleDriver");
         basicDataSource.setUrl("jdbc:oracle:thin:@localhost:1521:xe");
@@ -38,7 +34,7 @@ public class Jdbc {
         );
         ResultSet resultSet=statement.executeQuery();
         resultSet.next();
-        Long id=resultSet.getLong("ID");
+        long id=resultSet.getLong("ID");
         statement.close();
         connection.close();
         return id;
