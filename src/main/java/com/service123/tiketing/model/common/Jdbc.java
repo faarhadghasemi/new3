@@ -1,3 +1,8 @@
+
+
+import java.sql.Connection;
+import java.sql.SQLException;
+
 package com.service123.tiketing.model.common;
 
 import org.apache.commons.dbcp2.BasicDataSource;
@@ -8,8 +13,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class Jdbc {
-    private static Jdbc jdbc=new Jdbc();
-    private static BasicDataSource basicDataSource=new BasicDataSource();
+    private static  Jdbc jdbc=new Jdbc();
+    private static  BasicDataSource basicDataSource=new BasicDataSource();
 
     private Jdbc() {
     }
@@ -41,3 +46,4 @@ public class Jdbc {
 
     }
 }
+
