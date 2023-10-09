@@ -1,13 +1,12 @@
 package com.service123.tiketing.model.repository;
-
 import com.service123.tiketing.controller.exception.ContentNotFoundException;
 import com.service123.tiketing.model.common.Jdbc;
 import com.service123.tiketing.model.entity.Problem;
 import com.service123.tiketing.model.entity.User;
-import java.sql.Connection;
-import java.sql.Date;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
+import com.service123.tiketing.model.entity.enums.ProblemStatus;
+
+import java.sql.*;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,16 +23,18 @@ public class ProblemRepository implements RepositoryImpl<Problem> {
 
         connection = Jdbc.getJdbc().getConnection();
         statement = connection.prepareStatement(
-                "INSERT INTO PROBLEM_TBL values id=?,parentId=?,describtion=?,dateTime=?,sender=?,receiver=?,answer=?,deleted=? "
+                "INSERT INTO PROBLEM_TBL values id=?,parentId=?,describtion=?,date_Time=?,sender=?,receiver=?,answer=?,status=?,deleted=? "
         );
         statement.setLong(1, problem.getId());
-        statement.setLong(2, problem.getParentId());
-        statement.setString(3, problem.getDescribtion());
-        statement.setDate(4, Date.valueOf(problem.getDateTime().getChronology().dateNow()));
+//        statement.setLong(2, problem.getParentId());
+        statement.setString(3, problem.getDescription());
+        LocalDateTime localDateTime = java.time.LocalDateTime.now();
+        statement.setTimestamp(4, Timestamp.valueOf(localDateTime));
         statement.setString(5, problem.getSender().getUserName());
         statement.setString(6,problem.getReceiver().getUserName());
         statement.setString(7, problem.getAnswer());
-        statement.setBoolean(8, problem.isDeleted());
+        statement.setString(8, problem.getStatus().toString());
+        statement.setBoolean(9, problem.isDeleted());
         statement.execute();
 
         return problem;
@@ -51,15 +52,17 @@ public class ProblemRepository implements RepositoryImpl<Problem> {
         if (resultSet.next()) {
             connection = Jdbc.getJdbc().getConnection();
             statement = connection.prepareStatement(
-                    "Update PROBLEM_TBL set parentId=?,describtion=?,dateTime=?,sender=?,receiver=?,answer=?,deleted=? where id=?"
+                    "Update PROBLEM_TBL set parentId=?,describtion=?,date_Time=?,sender=?,receiver=?,answer=?,status=?,deleted=? where id=?"
             );
             statement.setLong(1, problem.getParentId());
-            statement.setString(2, problem.getDescribtion());
-            statement.setDate(3, Date.valueOf(problem.getDateTime().getChronology().dateNow()));
+            statement.setString(2, problem.getDescription());
+            LocalDateTime localDateTime = java.time.LocalDateTime.now();
+            statement.setTimestamp(3, Timestamp.valueOf(localDateTime));
             statement.setString(4, problem.getSender().getUserName());
             statement.setString(5, problem.getReceiver().getUserName());
             statement.setString(6, problem.getAnswer());
-            statement.setBoolean(7, problem.isDeleted());
+            statement.setString(7, problem.getStatus().toString());
+            statement.setBoolean(8, problem.isDeleted());
             statement.execute();
 
         } else {
@@ -81,13 +84,15 @@ public class ProblemRepository implements RepositoryImpl<Problem> {
         ResultSet resultSet = statement.executeQuery();
         if (resultSet.next()){
             problem=Problem.builder()
-                    .id(resultSet.getLong("id"))
-                    .parentId(resultSet.getLong("parentId"))
-                    .describtion(resultSet.getString("DESCRIBTION"))
-                    .dateTime(resultSet.getDate("datetime").toLocalDate())
-                    .sender(User.builder().userName(resultSet.getString("sender")).build())
-                    .receiver(User.builder().userName(resultSet.getString("receiver")).build())
-                    .answer(resultSet.getString("answer"))
+                    .id(resultSet.getLong("ID"))
+                    .parentId(resultSet.getLong("PARENTId"))
+                    .description(resultSet.getString("DESCRIPTION"))
+                    .dateTime(resultSet.getDate("DATETIME").toLocalDate())
+                    .sender(User.builder().userName(resultSet.getString("SENDER")).build())
+                    .receiver(User.builder().userName(resultSet.getString("RECEIVER")).build())
+                    .answer(resultSet.getString("ANSWER"))
+                    .status(ProblemStatus.valueOf(resultSet.getString("STATUS")))
+                    .deleted(resultSet.getBoolean("DELETED"))
                     .build();
         }
         if (problem != null){
@@ -116,11 +121,13 @@ public class ProblemRepository implements RepositoryImpl<Problem> {
             problem =  Problem.builder()
                     .id(resultSet.getLong("ID"))
                     .parentId(resultSet.getLong("PARENTId"))
-                    .describtion(resultSet.getString("DESCRIBTION"))
+                    .description(resultSet.getString("DESCRIPTION"))
                     .dateTime(resultSet.getDate("DATETIME").toLocalDate())
                     .sender(User.builder().userName(resultSet.getString("SENDER")).build())
                     .receiver(User.builder().userName(resultSet.getString("RECEIVER")).build())
                     .answer(resultSet.getString("ANSWER"))
+                    .status(ProblemStatus.valueOf(resultSet.getString("STATUS")))
+                    .deleted(resultSet.getBoolean("DELETED"))
                     .build();
             problemList.add(problem);
         }
@@ -143,11 +150,13 @@ public class ProblemRepository implements RepositoryImpl<Problem> {
             problem =Problem.builder()
                     .id(resultSet.getLong("ID"))
                     .parentId(resultSet.getLong("PARENTId"))
-                    .describtion(resultSet.getString("DESCRIBTION"))
+                    .description(resultSet.getString("DESCRIPTION"))
                     .dateTime(resultSet.getDate("DATETIME").toLocalDate())
                     .sender(User.builder().userName(resultSet.getString("SENDER")).build())
                     .receiver(User.builder().userName(resultSet.getString("RECEIVER")).build())
                     .answer(resultSet.getString("ANSWER"))
+                    .status(ProblemStatus.valueOf(resultSet.getString("STATUS")))
+                    .deleted(resultSet.getBoolean("DELETED"))
                     .build();
         }
         if (problem == null){
@@ -169,11 +178,13 @@ public class ProblemRepository implements RepositoryImpl<Problem> {
             problem =Problem.builder()
                     .id(resultSet.getLong("ID"))
                     .parentId(resultSet.getLong("PARENTId"))
-                    .describtion(resultSet.getString("DESCRIBTION"))
+                    .description(resultSet.getString("DESCRIPTION"))
                     .dateTime(resultSet.getDate("DATETIME").toLocalDate())
                     .sender(User.builder().userName(resultSet.getString("SENDER")).build())
                     .receiver(User.builder().userName(resultSet.getString("RECEIVER")).build())
                     .answer(resultSet.getString("ANSWER"))
+                    .status(ProblemStatus.valueOf(resultSet.getString("STATUS")))
+                    .deleted(resultSet.getBoolean("DELETED"))
                     .build();
         }
         if (problem == null){
