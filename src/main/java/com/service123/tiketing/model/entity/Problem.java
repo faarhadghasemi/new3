@@ -17,7 +17,7 @@ import java.time.LocalDate;
 public class Problem {
     private long id;
     private Long parentId;
-    private String description;
+    private String describtion;
     private LocalDate dateTime;
     private User sender;
     private User receiver;

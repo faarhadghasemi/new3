@@ -23,7 +23,7 @@ public class ProblemServlet extends HttpServlet {
         try {
             data = ProblemService.getProblemService().save(
                     Problem.builder()
-                            .description(req.getParameter("describtion"))
+                            .describtion(req.getParameter("describtion"))
                             .deleted(false)
                             .build()
             ).toString();
@@ -58,7 +58,7 @@ public class ProblemServlet extends HttpServlet {
         try {
            data = String.valueOf(ProblemService.getProblemService().edit(
                     Problem.builder().id(Long.parseLong(req.getParameter("id")))
-                            .description(req.getParameter("describtion"))
+                            .describtion(req.getParameter("describtion"))
                             .deleted(false)
                             .build()));
                              action = ActionType.EDIT;
