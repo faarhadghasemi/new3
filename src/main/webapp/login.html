@@ -1,118 +1,59 @@
-<!--<!DOCTYPE html>-->
-<!--<html lang="en">-->
-<!--<head>-->
-<!--    <meta charset="UTF-8">-->
-<!--    <title>Title</title>-->
-<!--</head>-->
-<!--<body>-->
-<!--<div id="container" class="container">-->
-<!--    &lt;!&ndash; FORM SECTION &ndash;&gt;-->
-<!--    <div class="row">-->
-<!--        &lt;!&ndash; SIGN UP &ndash;&gt;-->
-<!--        <div class="col align-items-center flex-col sign-up">-->
-<!--            <div class="form-wrapper align-items-center">-->
-<!--                <div class="form sign-up">-->
-<!--                    <div class="input-group">-->
-<!--                        <i class='bx bxs-user'></i>-->
-<!--                        <input type="text" placeholder="Username">-->
-<!--                    </div>-->
-<!--                    <div class="input-group">-->
-<!--                        <i class='bx bx-mail-send'></i>-->
-<!--                        <input type="email" placeholder="Email">-->
-<!--                    </div>-->
-<!--                    <div class="input-group">-->
-<!--                        <i class='bx bxs-lock-alt'></i>-->
-<!--                        <input type="password" placeholder="Password">-->
-<!--                    </div>-->
-<!--                    <div class="input-group">-->
-<!--                        <i class='bx bxs-lock-alt'></i>-->
-<!--                        <input type="password" placeholder="Confirm password">-->
-<!--                    </div>-->
-<!--                    <button>-->
-<!--                        Sign up-->
-<!--                    </button>-->
-<!--                    <p>-->
-<!--							<span>-->
-<!--								Already have an account?-->
-<!--							</span>-->
-<!--                        <b onclick="toggle()" class="pointer">-->
-<!--                            Sign in here-->
-<!--                        </b>-->
-<!--                    </p>-->
-<!--                </div>-->
-<!--            </div>-->
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link rel="stylesheet" href="assets/css/login.css">
+</head>
+<body>
+<div class="wrapper">
+    <div class="title-text">
+        <div class="title login">Login Form</div>
+        <div class="title signup">Signup Form</div>
+    </div>
+    <div class="form-container">
+        <div class="slide-controls">
+            <input type="radio" name="slide" id="login" checked>
+            <input type="radio" name="slide" id="signup">
+            <label for="login" class="slide login">Login</label>
+            <label for="signup" class="slide signup">Signup</label>
+            <div class="slider-tab"></div>
+        </div>
+        <div class="form-inner">
+            <form action="#" class="login">
+                <div class="field">
+                    <input type="text" placeholder="Email Address" required>
+                </div>
+                <div class="field">
+                    <input type="password" placeholder="Password" required>
+                </div>
+                <div class="pass-link"><a href="#">Forgot password?</a></div>
+                <div class="field btn">
+                    <div class="btn-layer"></div>
+                    <input type="submit" value="Login">
+                </div>
+                <div class="signup-link">Not a member? <a href="">Signup now</a></div>
+            </form>
+            <form action="#" class="signup">
+                <div class="field">
+                    <input type="text" placeholder="Email Address" required>
+                </div>
+                <div class="field">
+                    <input type="password" placeholder="Password" required>
+                </div>
+                <div class="field">
+                    <input type="password" placeholder="Confirm password" required>
+                </div>
+                <div class="field btn">
+                    <div class="btn-layer"></div>
+                    <input type="submit" value="Signup">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 
-<!--        </div>-->
-<!--        &lt;!&ndash; END SIGN UP &ndash;&gt;-->
-<!--        &lt;!&ndash; SIGN IN &ndash;&gt;-->
-<!--        <div class="col align-items-center flex-col sign-in">-->
-<!--            <form action="/login.do" method="post">-->
-<!--                <div class="form-wrapper align-items-center">-->
-<!--                    <div class="form sign-in">-->
-<!--                        <div class="input-group">-->
-<!--                            <i class='bx bxs-user'></i>-->
-<!--                            <input type="text" name="username" placeholder="Username">-->
-<!--                        </div>-->
-<!--                        <div class="input-group">-->
-<!--                            <i class='bx bxs-lock-alt'></i>-->
-<!--                            <input type="password" name="password" placeholder="Password">-->
-<!--                        </div>-->
-<!--                        <input type="submit" value="Sign in">-->
 
-<!--                        <p>-->
-<!--                            <b>-->
-<!--                                Forgot password?-->
-<!--                            </b>-->
-<!--                        </p>-->
-<!--                        <p>-->
-<!--							<span>-->
-<!--								Don't have an account?-->
-<!--							</span>-->
-<!--                            <b onclick="toggle()" class="pointer">-->
-<!--                                Sign up here-->
-<!--                            </b>-->
-<!--                        </p>-->
-<!--                    </div>-->
-<!--            </form>-->
-<!--            </div>-->
-<!--            <div class="form-wrapper">-->
-
-<!--            </div>-->
-<!--        </div>-->
-<!--        &lt;!&ndash; END SIGN IN &ndash;&gt;-->
-<!--    </div>-->
-<!--    &lt;!&ndash; END FORM SECTION &ndash;&gt;-->
-<!--    &lt;!&ndash; CONTENT SECTION &ndash;&gt;-->
-<!--    <div class="row content-row">-->
-<!--        &lt;!&ndash; SIGN IN CONTENT &ndash;&gt;-->
-<!--        <div class="col align-items-center flex-col">-->
-<!--            <div class="text sign-in">-->
-<!--                <h2>-->
-<!--                    Welcome-->
-<!--                </h2>-->
-
-<!--            </div>-->
-<!--            <div class="img sign-in">-->
-
-<!--            </div>-->
-<!--        </div>-->
-<!--        &lt;!&ndash; END SIGN IN CONTENT &ndash;&gt;-->
-<!--        &lt;!&ndash; SIGN UP CONTENT &ndash;&gt;-->
-<!--        <div class="col align-items-center flex-col">-->
-<!--            <div class="img sign-up">-->
-
-<!--            </div>-->
-<!--            <div class="text sign-up">-->
-<!--                <h2>-->
-<!--                    Join with us-->
-<!--                </h2>-->
-
-<!--            </div>-->
-<!--        </div>-->
-<!--        &lt;!&ndash; END SIGN UP CONTENT &ndash;&gt;-->
-<!--    </div>-->
-<!--    &lt;!&ndash; END CONTENT SECTION &ndash;&gt;-->
-<!--</div>-->
-
-<!--</body>-->
-<!--</html>-->
+<script src="assets/js/login.js"></script>
+</body>
+</html>
