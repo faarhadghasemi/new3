@@ -21,7 +21,7 @@ public class UserRepository implements RepositoryImpl<User> {
         user.setId(Jdbc.getJdbc().nextId("USER_SEQ"));
         connection= Jdbc.getJdbc().getConnection();
         statement=connection.prepareStatement(
-                "INSERT INTO USER_TBL (ID,USER_ROLES,NAME,FAMILY,USER_NAME,PASSWORD,description,ACTIVE,DELETED) VALUES (?,?,?,?,?,?,?,?,?) "
+                "INSERT INTO USER_TBL (ID,USER_ROLES,NAME,FAMILY,USERNAME,PASSWORD,ACTIVE,DELETED) VALUES (?,?,?,?,?,?,?,?) "
         );
         statement.setLong(1,user.getId());
         statement.setString(2,user.getUserRoles().toString());
@@ -29,9 +29,8 @@ public class UserRepository implements RepositoryImpl<User> {
         statement.setString(4,user.getFamily());
         statement.setString(5,user.getUserName());
         statement.setString(6,user.getPassword());
-        statement.setString(7,user.getDescription());
-        statement.setBoolean(8,user.isActive());
-        statement.setBoolean(9,user.isDeleted());
+        statement.setBoolean(7,user.isActive());
+        statement.setBoolean(8,user.isDeleted());
         statement.execute();
         return user;
     }
@@ -48,7 +47,7 @@ public class UserRepository implements RepositoryImpl<User> {
         if (resultSet.next()) {
             connection = Jdbc.getJdbc().getConnection();
             statement = connection.prepareStatement(
-                    "UPDATE USER_TBL SET USER_ROLES=?,NAME=?,FAMILY=?,USER_NAME=?,PASSWORD=?,description=?,ACTIVE=?,DELETED=? WHERE ID=?"
+                    "UPDATE USER_TBL SET USER_ROLES=?,NAME=?,FAMILY=?,USERNAME=?,PASSWORD=?,ACTIVE=?,DELETED=? WHERE ID=?"
             );
 
             statement.setString(1,user.getUserRoles().toString());
@@ -56,9 +55,8 @@ public class UserRepository implements RepositoryImpl<User> {
             statement.setString(3, user.getFamily());
             statement.setString(4, user.getUserName());
             statement.setString(5, user.getPassword());
-            statement.setString(6, user.getDescription());
-            statement.setBoolean(7, user.isActive());
-            statement.setBoolean(8, user.isDeleted());
+            statement.setBoolean(6, user.isActive());
+            statement.setBoolean(7, user.isDeleted());
             statement.execute();
         }else {
             user=null;
@@ -83,9 +81,8 @@ public class UserRepository implements RepositoryImpl<User> {
                   //todo : .userRoles(UserRoles.valueOf(resultSet.getString("User_Role")))
                     .name(resultSet.getString("NAME"))
                     .family(resultSet.getString("FAMILY"))
-                    .userName(resultSet.getString("USER_NAME"))
+                    .userName(resultSet.getString("USERNAME"))
                     .password(resultSet.getString("PASSWORD"))
-                    .description(resultSet.getString("DESCRIPTION"))
                     .active(resultSet.getBoolean("ACTIVE"))
                     .deleted(resultSet.getBoolean("DELETED"))
                     .build();
@@ -106,7 +103,7 @@ public class UserRepository implements RepositoryImpl<User> {
     public List<User> findAll() throws Exception {
         connection= Jdbc.getJdbc().getConnection();
         statement=connection.prepareStatement(
-                "SELECT * FROM USER_TBL AND DELETED=0"
+                "SELECT * FROM USER_TBL where DELETED=0"
         );
         ResultSet resultSet=statement.executeQuery();
         List<User> userList=null;
@@ -119,7 +116,6 @@ public class UserRepository implements RepositoryImpl<User> {
                     .family(resultSet.getString("FAMILY"))
                     .userName(resultSet.getString("USER_NAME"))
                     .password(resultSet.getString("PASSWORD"))
-                    .description(resultSet.getString("DESCRIPTION"))
                     .active(resultSet.getBoolean("ACTIVE"))
                     .deleted(resultSet.getBoolean("DELETED"))
                     .build();
@@ -134,7 +130,7 @@ public class UserRepository implements RepositoryImpl<User> {
     public boolean isDuplicated(String userName) throws Exception {
         connection= Jdbc.getJdbc().getConnection();
         statement=connection.prepareStatement(
-                "SELECT COUNT(USER_NAME) AS C FROM USER_TBL  WHERE USER_NAME =?"
+                "SELECT COUNT(USERNAME) AS C FROM USER_TBL  WHERE USERNAME =?"
         );
         statement.setString(1, userName);
         ResultSet resultSet=statement.executeQuery();
@@ -158,9 +154,8 @@ public class UserRepository implements RepositoryImpl<User> {
                     //todo : .userRoles(UserRoles.valueOf(resultSet.getString("User_Role")))
                     .name(resultSet.getString("NAME"))
                     .family(resultSet.getString("FAMILY"))
-                    .userName(resultSet.getString("USER_NAME"))
+                    .userName(resultSet.getString("USERNAME"))
                     .password(resultSet.getString("PASSWORD"))
-                    .description(resultSet.getString("DESCRIPTION"))
                     .active(resultSet.getBoolean("ACTIVE"))
                     .deleted(resultSet.getBoolean("DELETED"))
                     .build();
@@ -175,7 +170,7 @@ public class UserRepository implements RepositoryImpl<User> {
     public User login(User user) throws Exception {
         connection= Jdbc.getJdbc().getConnection();
         statement=connection.prepareStatement(
-                "SELECT * FROM USER_TBL WHERE USER_NAME=? AND PASSWORD=?"
+                "SELECT * FROM USER_TBL WHERE USERNAME=? AND PASSWORD=?"
         );
         statement.setString(1, user.getUserName());
         statement.setString(2, user.getPassword());
@@ -190,7 +185,6 @@ public class UserRepository implements RepositoryImpl<User> {
                     .family(resultSet.getString("FAMILY"))
                     .userName(resultSet.getString("USER_NAME"))
                     .password(resultSet.getString("PASSWORD"))
-                    .description(resultSet.getString("DESCRIPTION"))
                     .active(resultSet.getBoolean("ACTIVE"))
                     .deleted(resultSet.getBoolean("DELETED"))
                     .build();

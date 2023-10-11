@@ -23,10 +23,10 @@ public class ProblemRepository implements RepositoryImpl<Problem> {
 
         connection = Jdbc.getJdbc().getConnection();
         statement = connection.prepareStatement(
-                "INSERT INTO PROBLEM_TBL values id=?,parentId=?,describtion=?,date_Time=?,sender=?,receiver=?,answer=?,status=?,deleted=? "
+                "INSERT INTO PROBLEM_TBL (id,PARENT_ID,DESCRIPTION,date_Time,sender,receiver,answer,status,deleted) values (?,?,?,?,?,?,?,?,?) "
         );
         statement.setLong(1, problem.getId());
-//        statement.setLong(2, problem.getParentId());
+        statement.setLong(2, (problem.getParentId()==null)?0:problem.getParentId());
         statement.setString(3, problem.getDescription());
         LocalDateTime localDateTime = java.time.LocalDateTime.now();
         statement.setTimestamp(4, Timestamp.valueOf(localDateTime));
@@ -52,7 +52,7 @@ public class ProblemRepository implements RepositoryImpl<Problem> {
         if (resultSet.next()) {
             connection = Jdbc.getJdbc().getConnection();
             statement = connection.prepareStatement(
-                    "Update PROBLEM_TBL set parentId=?,describtion=?,date_Time=?,sender=?,receiver=?,answer=?,status=?,deleted=? where id=?"
+                    "Update PROBLEM_TBL set PARENT_ID=?,DESCRIPTION=?,date_Time=?,sender=?,receiver=?,answer=?,status=?,deleted=? where id=?"
             );
             statement.setLong(1, problem.getParentId());
             statement.setString(2, problem.getDescription());
@@ -170,7 +170,7 @@ public class ProblemRepository implements RepositoryImpl<Problem> {
 
         connection = Jdbc.getJdbc().getConnection();
         statement = connection.prepareStatement(
-                "select * from PROBLEM_TBL where deleted=0 and parentId=?");
+                "select * from PROBLEM_TBL where deleted=0 and PARENT_ID=?");
         statement.setLong(1,parentId);
         ResultSet resultSet = statement.executeQuery();
         Problem problem=null;
