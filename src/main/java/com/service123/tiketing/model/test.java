@@ -13,27 +13,31 @@ import java.time.LocalDate;
 
 public class test {
     public static void main(String[] args) throws Exception {
-        User user = User.builder()
-                .userRoles(UserRoles.employee)
-                .name("ava")
-                .family("lo")
-                .userName("ava345")
-                .password("ava098")
-                .build();
+//        User user = User.builder()
+//                .userRoles(UserRoles.employee)
+//                .name("ava")
+//                .family("lo")
+//                .userName("ava345")
+//                .password("ava098")
+//                .build();
 
 //        System.out.println(UserService.getService().save(user));
 //        System.out.println(UserService.getService().remove(7));
 //        System.out.println(UserService.getService().edit(user));
 //        System.out.println(UserService.getService().findById(21));
-        Problem problem = Problem
-                .builder()
-                .description("aya dorost save kard?")
-                .dateTime(LocalDate.now())
-                .sender(User.builder().userName("arman").build())
-                .receiver(User.builder().userName("farhad").build())
-                .status(ProblemStatus.UnSeen)
-                .build();
+//        Problem problem = Problem
+//                .builder()
+//                .description("no")
+//                .dateTime(LocalDate.now())
+//                .sender(User.builder().userName("farhad").build())
+//                .receiver(User.builder().userName("arman").build())
+//                .status(ProblemStatus.Pending)
+//                .build();
 
-        System.out.println(ProblemService.getProblemService().save(problem));
+//        System.out.println(ProblemService.getProblemService().save(problem));
+//        System.out.println(ProblemService.getProblemService().edit(problem));
+//        System.out.println(ProblemService.getProblemService().remove(3));
+//        System.out.println(ProblemService.getProblemService().findAll());
+//        System.out.println(ProblemService.getProblemService().findById(1));
     }
 }

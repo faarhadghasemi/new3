@@ -52,17 +52,18 @@ problem.setId(Jdbc.getJdbc().nextId("PROBLEM_SEQ"));
         if (resultSet.next()) {
             connection = Jdbc.getJdbc().getConnection();
             statement = connection.prepareStatement(
-                    "Update PROBLEM_TBL set PARENT_ID=?,DESCRIPTION=?,date_Time=?,sender=?,receiver=?,answer=?,status=?,deleted=? where id=?"
+                    "Update PROBLEM_TBL set PARENT_ID=ID,DESCRIPTION=?,date_Time=?,sender=?,receiver=?,answer=?,status=?,deleted=? where id=?"
             );
-            statement.setLong(1, problem.getParentId());
-            statement.setString(2, problem.getDescription());
+//            statement.setLong(1, problem.getParentId());
+            statement.setString(1, problem.getDescription());
             LocalDateTime localDateTime = java.time.LocalDateTime.now();
-            statement.setTimestamp(3, Timestamp.valueOf(localDateTime));
-            statement.setString(4, problem.getSender().getUserName());
-            statement.setString(5, problem.getReceiver().getUserName());
-            statement.setString(6, problem.getAnswer());
-            statement.setString(7, problem.getStatus().toString());
-            statement.setBoolean(8, problem.isDeleted());
+            statement.setTimestamp(2, Timestamp.valueOf(localDateTime));
+            statement.setString(3, problem.getSender().getUserName());
+            statement.setString(4, problem.getReceiver().getUserName());
+            statement.setString(5, problem.getAnswer());
+            statement.setString(6, problem.getStatus().toString());
+            statement.setBoolean(7, problem.isDeleted());
+            statement.setLong(8, problem.getId());
             statement.execute();
 
         } else {
@@ -85,9 +86,9 @@ problem.setId(Jdbc.getJdbc().nextId("PROBLEM_SEQ"));
         if (resultSet.next()){
             problem=Problem.builder()
                     .id(resultSet.getLong("ID"))
-                    .parentId(resultSet.getLong("PARENTId"))
+//                    .parentId(resultSet.getLong("PARENTId"))
                     .description(resultSet.getString("DESCRIPTION"))
-                    .dateTime(resultSet.getDate("DATETIME").toLocalDate())
+                    .dateTime(resultSet.getDate("DATE_TIME").toLocalDate())
                     .sender(User.builder().userName(resultSet.getString("SENDER")).build())
                     .receiver(User.builder().userName(resultSet.getString("RECEIVER")).build())
                     .answer(resultSet.getString("ANSWER"))
@@ -120,9 +121,9 @@ problem.setId(Jdbc.getJdbc().nextId("PROBLEM_SEQ"));
         while (resultSet.next()){
             problem =  Problem.builder()
                     .id(resultSet.getLong("ID"))
-                    .parentId(resultSet.getLong("PARENTId"))
+//                    .parentId(resultSet.getLong("PARENTId"))
                     .description(resultSet.getString("DESCRIPTION"))
-                    .dateTime(resultSet.getDate("DATETIME").toLocalDate())
+                    .dateTime(resultSet.getDate("DATE_TIME").toLocalDate())
                     .sender(User.builder().userName(resultSet.getString("SENDER")).build())
                     .receiver(User.builder().userName(resultSet.getString("RECEIVER")).build())
                     .answer(resultSet.getString("ANSWER"))
@@ -149,9 +150,9 @@ problem.setId(Jdbc.getJdbc().nextId("PROBLEM_SEQ"));
         while (resultSet.next()){
             problem =Problem.builder()
                     .id(resultSet.getLong("ID"))
-                    .parentId(resultSet.getLong("PARENTId"))
+//                    .parentId(resultSet.getLong("PARENTId"))
                     .description(resultSet.getString("DESCRIPTION"))
-                    .dateTime(resultSet.getDate("DATETIME").toLocalDate())
+                    .dateTime(resultSet.getDate("DATE_TIME").toLocalDate())
                     .sender(User.builder().userName(resultSet.getString("SENDER")).build())
                     .receiver(User.builder().userName(resultSet.getString("RECEIVER")).build())
                     .answer(resultSet.getString("ANSWER"))
