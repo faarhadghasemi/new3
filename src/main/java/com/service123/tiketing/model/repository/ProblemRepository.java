@@ -20,10 +20,10 @@ public class ProblemRepository implements RepositoryImpl<Problem> {
 
     @Override
     public Problem save(Problem problem) throws Exception {
-
+problem.setId(Jdbc.getJdbc().nextId("PROBLEM_SEQ"));
         connection = Jdbc.getJdbc().getConnection();
         statement = connection.prepareStatement(
-                "INSERT INTO PROBLEM_TBL (id,PARENT_ID,DESCRIPTION,date_Time,sender,receiver,answer,status,deleted) values (?,?,?,?,?,?,?,?,?) "
+                "INSERT INTO PROBLEM_TBL (ID,PARENT_ID,DESCRIPTION,date_Time,sender,receiver,answer,status,deleted) values (?,?,?,?,?,?,?,?,?) "
         );
         statement.setLong(1, problem.getId());
         statement.setLong(2, (problem.getParentId()==null)?0:problem.getParentId());
