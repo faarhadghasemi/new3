@@ -3,10 +3,12 @@ package com.service123.tiketing.model.repository;
 import com.service123.tiketing.controller.exception.ContentNotFoundException;
 import com.service123.tiketing.model.common.Jdbc;
 import com.service123.tiketing.model.entity.User;
+import com.service123.tiketing.model.entity.enums.UserRoles;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 import java.util.List;
 
 public class UserRepository implements RepositoryImpl<User> {
@@ -57,6 +59,7 @@ public class UserRepository implements RepositoryImpl<User> {
             statement.setString(5, user.getPassword());
             statement.setBoolean(6, user.isActive());
             statement.setBoolean(7, user.isDeleted());
+            statement.setLong(8, user.getId());
             statement.execute();
         }else {
             user=null;
@@ -89,9 +92,9 @@ public class UserRepository implements RepositoryImpl<User> {
         }
         if (user!=null) {
             statement = connection.prepareStatement(
-                    "UPDATE USER_TBL SET DELETED=? WHERE ID=?"
+                    "UPDATE USER_TBL SET DELETED=1 WHERE ID=?"
             );
-            statement.setLong(1, id);
+            statement.setLong(1,user.getId());
             statement.execute();
         }else {
             throw new ContentNotFoundException("User Not Found");
@@ -106,15 +109,15 @@ public class UserRepository implements RepositoryImpl<User> {
                 "SELECT * FROM USER_TBL where DELETED=0"
         );
         ResultSet resultSet=statement.executeQuery();
-        List<User> userList=null;
+        List<User> userList=new ArrayList<>();
         while (resultSet.next()){
             User user=User
                     .builder()
                     .id(resultSet.getLong("ID"))
-                    //todo : .userRoles(UserRoles.valueOf(resultSet.getString("User_Role")))
+                    .userRoles(UserRoles.valueOf(resultSet.getString("USER_ROLES")))
                     .name(resultSet.getString("NAME"))
                     .family(resultSet.getString("FAMILY"))
-                    .userName(resultSet.getString("USER_NAME"))
+                    .userName(resultSet.getString("USERNAME"))
                     .password(resultSet.getString("PASSWORD"))
                     .active(resultSet.getBoolean("ACTIVE"))
                     .deleted(resultSet.getBoolean("DELETED"))
