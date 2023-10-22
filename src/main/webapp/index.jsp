@@ -6,8 +6,6 @@
 <body>
 <h1>Main Page</h1>
 <a href="/login.html" >SignIn/SignUp</a>
-<br><br>
-<a href="/problem.jsp" >Problem</a>
-
+<br> <a href="/registration%20page1.html"></a> <br>
 </body>
 </html>
