@@ -43,6 +43,7 @@ public class UserService implements ServiceImpl<User> {
 
 
     @Override
+//    todo: isDuplicated(user.getUserName) for this method!!!
     public User edit(User user) throws Exception {
         try (UserRepository repository = new UserRepository()) {
             return repository.edit(user);
