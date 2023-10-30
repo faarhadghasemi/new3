@@ -5,7 +5,7 @@
 </head>
 <body>
 <h1>Main Page</h1>
-<a href="/Customer1.html" >SignIn/SignUp</a>
+<a href="login.html " >SignIn/SignUp</a>
 <br> <a href="/RegistrationPage.html">Registration</a> <br>
 </body>
 </html>

@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="/assets/font/IRANYekanX-Bold.woff2">
     <link rel="stylesheet" href="/assets/font/IRANYekanX-Light.woff2">
     <link rel="stylesheet" href="/assets/font/IRANYekanX-Regular.woff2">
-    <link rel="stylesheet" href="/assets/Customer1/css/style2.css">
+    <link rel="stylesheet" href="src/main/webapp/assets/Customer1/css/style2.css">
 
 </head>
 <body>
@@ -19,7 +19,7 @@
 
     <div class="content-container">
         <div class="image-container">
-            <img src="assets/image/Ticketing%20img.jpg" alt="تصویر شماره1" style="float:left;width:500px;height:300px;">
+            <img src="assets/image/Ticketing%20img.jpg" alt="تصویر شماره1" style="float:right;width:500px;height:300px;">
         </div>
 
         <div class="form-container">
@@ -37,28 +37,28 @@
         </div>
     </div>
 
-    <table>
-        <thead>
-            <tr>
-                <th>User Role</th>
-                <th>ID</th>
-                <th>UserName</th>
-                <th>Name</th>
-                <th>Family</th>
-            </tr>
-        </thead>
-        <tbody>
-            <% for (User user : UserService.getService().findAll()) { %>
-            <tr>
-                <td><%= user.getUserRoles() %></td>
-                <td><%= user.getId() %></td>
-                <td><%= user.getUserName() %></td>
-                <td><%= user.getName() %></td>
-                <td><%= user.getFamily() %></td>
-            </tr>
-            <% } %>
-        </tbody>
-    </table>
+<!--    <table>-->
+<!--        <thead>-->
+<!--            <tr>-->
+<!--                <th>User Role</th>-->
+<!--                <th>ID</th>-->
+<!--                <th>UserName</th>-->
+<!--                <th>Name</th>-->
+<!--                <th>Family</th>-->
+<!--            </tr>-->
+<!--        </thead>-->
+<!--&lt;!&ndash;        <tbody>&ndash;&gt;-->
+<!--&lt;!&ndash;            <% for (User user : UserService.getService().findAll()) { %>&ndash;&gt;-->
+<!--&lt;!&ndash;            <tr>&ndash;&gt;-->
+<!--&lt;!&ndash;                <td><%= user.getUserRoles() %></td>&ndash;&gt;-->
+<!--&lt;!&ndash;                <td><%= user.getId() %></td>&ndash;&gt;-->
+<!--&lt;!&ndash;                <td><%= user.getUserName() %></td>&ndash;&gt;-->
+<!--&lt;!&ndash;                <td><%= user.getName() %></td>&ndash;&gt;-->
+<!--&lt;!&ndash;                <td><%= user.getFamily() %></td>&ndash;&gt;-->
+<!--&lt;!&ndash;            </tr>&ndash;&gt;-->
+<!--&lt;!&ndash;            <% } %>&ndash;&gt;-->
+<!--&lt;!&ndash;        </tbody>&ndash;&gt;-->
+<!--    </table>-->
 <script src="assets/Customer1/js/"></script>
 </body>
 </html>
