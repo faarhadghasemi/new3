@@ -45,7 +45,7 @@
      set to the current working directory.
 -->
 
-<project name="My Project" default="compile" basedir="">
+<project name="My Project" default="compile" basedir=".">
 
 
 
@@ -184,11 +184,11 @@
 -->
 
     <!-- Include all elements that Tomcat exposes to applications -->
-    <fileset dir="../../../../bin">
+    <fileset dir="${catalina.home}/bin">
       <include name="*.jar"/>
     </fileset>
-    <pathelement location="../../../../lib"/>
-    <fileset dir="../../../../lib">
+    <pathelement location="${catalina.home}/lib"/>
+    <fileset dir="${catalina.home}/lib">
       <include name="*.jar"/>
     </fileset>
 
