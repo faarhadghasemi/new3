@@ -2,14 +2,14 @@
 
 /* Embedding the 'IRANYekan-Bold' font for headers */
 @font-face {
-    font-family: 'IRANYekan-Bold'; 
-    src: url('font/IRANYekanX-Bold.woff2') format('woff2');
+    font-family: 'IRANYekan-Bold';
+    src: url('/assets/font/IRANYekanX-Bold.woff2') format('woff2');
 }
 
 /* Embedding the 'IRANYekan-Regular' font for content and forms */
 @font-face {
     font-family: 'IRANYekan-Regular';
-    src: url('font/IRANYekanX-Regular.woff2') format('woff2');
+    src: url('/assets/font/IRANYekanX-Regular.woff2') format('woff2');
 }
 
 /* Base styling for the body element */

@@ -14,13 +14,13 @@ import java.time.LocalDate;
 public class test {
     public static void main(String[] args) throws Exception {
 //        User user = User.builder()
-//                .userRoles(UserRoles.employee)
-//                .name("ava")
-//                .family("lo")
-//                .userName("ava345")
-//                .password("ava098")
+//                .userRoles(UserRoles.admin)
+//                .name("ali")
+//                .family("molaee")
+//                .userName("ali123")
+//                .password("123ali")
 //                .build();
-
+//
 //        System.out.println(UserService.getService().save(user));
 //        System.out.println(UserService.getService().remove(7));
 //        System.out.println(UserService.getService().edit(user));

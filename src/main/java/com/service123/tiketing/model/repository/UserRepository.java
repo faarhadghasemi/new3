@@ -154,7 +154,7 @@ public class UserRepository implements RepositoryImpl<User> {
             user=User
                     .builder()
                     .id(resultSet.getLong("ID"))
-                    //todo : .userRoles(UserRoles.valueOf(resultSet.getString("User_Role")))
+                    .userRoles(UserRoles.valueOf(resultSet.getString("User_Role")))
                     .name(resultSet.getString("NAME"))
                     .family(resultSet.getString("FAMILY"))
                     .userName(resultSet.getString("USERNAME"))
@@ -183,7 +183,7 @@ public class UserRepository implements RepositoryImpl<User> {
             user=User
                     .builder()
                     .id(resultSet.getLong("ID"))
-                    //todo : .userRoles(UserRoles.valueOf(resultSet.getString("User_Role")))
+                    .userRoles(UserRoles.valueOf(resultSet.getString("User_Role")))
                     .name(resultSet.getString("NAME"))
                     .family(resultSet.getString("FAMILY"))
                     .userName(resultSet.getString("USER_NAME"))
