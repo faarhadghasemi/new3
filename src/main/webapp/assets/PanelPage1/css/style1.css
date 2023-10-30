@@ -1,0 +1,141 @@
+/* Embedding the custom fonts */
+
+/* Embedding the 'IRANYekan-Bold' font for headers */
+@font-face {
+    font-family: 'IRANYekan-Bold'; 
+    src: url('font/IRANYekanX-Bold.woff2') format('woff2');
+}
+
+/* Embedding the 'IRANYekan-Regular' font for content and forms */
+@font-face {
+    font-family: 'IRANYekan-Regular';
+    src: url('font/IRANYekanX-Regular.woff2') format('woff2');
+}
+
+/* Base styling for the body element */
+body {
+    direction: rtl; /* Right-to-left direction for languages like Arabic and Persian */
+    font-family: 'IRANYekan-Regular', sans-serif; /* Default font for the body content */
+    background-color: lightblue; /* Background color of the entire webpage */
+}
+
+/* Styling for the top header section */
+.top {
+    width: 100%; /* Takes the full width of its container */
+    height: 50px; /* Sets a fixed height */
+    background: #475a8a; /* Background color */
+    display: flex; /* Uses Flexbox to center child elements */
+    justify-content: center; /* Centers children horizontally */
+    align-items: center; /* Centers children vertically */
+}
+
+/* Styling for the main title inside the top header */
+.top h1 {
+    color: #fff; /* White text color */
+    text-align: center; /* Centers the text */
+    font-size: 2rem; /* Font size of 2 times the root font size */
+    margin: 0; /* Removes default margin */
+    font-family: 'IRANYekan-Bold', sans-serif; /* Uses the bold custom font for headers */
+}
+
+/* Styling for the main content container that holds the image and form */
+.content-container {
+    display: flex; /* Uses Flexbox to arrange child elements in a row */
+    justify-content: space-between; /* Places maximum space between children */
+    align-items: center; /* Aligns children to the center of the container */
+    gap: 20px; /* Adds space between children */
+    margin: 20px 15%; /* Adds vertical space and 15% left-right margins */
+    width: 70%; /* Adjusting the width after adding margins */
+}
+
+/* Styling for the image container */
+.image-container {
+    flex: 1; /* Allows the element to grow and occupy available space */
+    max-width: 50%; /* Restricts to half of parent's width */
+	margin-left:40px;
+}
+.responsive-img {
+    max-width: 100%; height: auto;  }
+
+/* Styling for the form container */
+.form-container {
+    flex: 1; /* Allows the element to grow and occupy available space */
+    max-width: 100%; /* Restricts to half of parent's width */
+}
+
+/* Styling for form labels */
+.myform label {
+    display: block; /* Makes the label take up the full width of its container */
+    margin-bottom: 10px; /* Adds space below the label */
+    font-weight: bold; /* Makes the label text bold */
+}
+
+/* Styling for form select and input elements */
+.myform select, 
+.myform input[type="text"], 
+.myform input[type="password"] {
+    display: block; /* Makes the input take up the full width of its container */
+    width: 100%; /* Takes up the full width of its parent container */
+    padding: 10px 16px; /* Adds inner padding to the input elements */
+    margin: 8px 0; /* Adds vertical space between form elements */
+    box-sizing: border-box; /* Ensures width includes padding and border */
+    border: 2px solid #e0e0e0; /* Border around the input */
+    border-radius: 6px; /* Rounded corners */
+    transition: border-color 0.3s ease; /* Smooth transition for border color */
+}
+
+/* Styling for form elements when hovered */
+.myform select:hover, 
+.myform input[type="text"]:hover, 
+.myform input[type="password"]:hover {
+    border-color: #b0b0b0; /* Changes border color on hover */
+}
+
+/* Styling for form elements when focused */
+.myform select:focus, 
+.myform input[type="text"]:focus, 
+.myform input[type="password"]:focus {
+    border-color: #475a8a; /* Changes border color when focused */
+    outline: none; /* Removes the default browser outline */
+}
+
+/* Styling for the form submit button */
+.myform input[type="submit"] {
+    background-color: #475a8a; /* Background color */
+    color: white; /* Text color */
+    cursor: pointer; /* Makes the cursor indicate a clickable link */
+    border: none; /* No border */
+    border-radius: 6px; /* Rounded corners */
+    padding: 10px 20px; /* Padding inside the button */
+    transition: background-color 0.3s ease; /* Smooth color transition for hover effect */
+    font-family: 'IRANYekan-Regular', sans-serif; /* Custom font for the button */
+}
+
+/* Styling for the button when hovered */
+.myform input[type="submit"]:hover {
+    background-color: #35456a; /* Darker background color on hover */
+}
+
+/* Styling for the button when pressed */
+.myform input[type="submit"]:active {
+    background-color: #2a375a; /* Even darker color when the button is pressed */
+}
+
+/* Responsive design for medium-sized screens */
+@media (max-width: 768px) {
+    .content-container {
+        flex-direction: column; /* Stacks children vertically */
+    }
+
+    .image-container, .form-container {
+        max-width: 100%; /* Allows children to occupy full width */
+    }
+}
+
+/* Responsive design for smaller screens */
+@media (max-width: 480px) {
+    .top h1 {
+        font-size: 1.5rem; /* Reduces the font size for the title */
+    }
+	
+}
