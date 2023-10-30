@@ -47,17 +47,19 @@ public class UserServlet extends HttpServlet {
                     .name(request.getParameter("name"))
                     .family(request.getParameter("family"))
                     .userName(request.getParameter("username"))
-                    .description(request.getParameter("description"))
+                    .password(request.getParameter("password"))
                     .deleted(false)
                     .build()
             ).toString();
             action= ActionType.SAVE;
+            System.out.println(data);
 
         }catch (Exception e){
             data=e.getMessage();
             action=ActionType.ERROR;
         }finally {
-            try {LogDa.log(action,data,1);}catch (Exception e){
+            try {LogDa.log(action,data,1);}
+            catch (Exception e){
                 System.out.println("ERROR CONNECTING LOG SERVER");
             }
         }
