@@ -1,0 +1,69 @@
+<%@ page import="com.service123.tiketing.model.entity.User" %>
+<%@ page import="com.service123.tiketing.model.service.UserService" %>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>داشبورد کاربری تیکت</title>
+    <link rel="stylesheet" href="RegistrationPageStyle.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <script src="assets/js/js.js"></script>
+</head>
+<body>
+    <div class="top">
+        <h1>ثبت داشبورد کاربری</h1>
+    </div>
+
+    <div class="content-container">
+        <div class="image-container">
+            <img src="Ticketing img.jpg"  class="responsive-img">
+			 
+        </div>
+
+        <div class="form-container">
+            <div class="myform">
+                <h2>لطفا مشخصات خود را واردنمایید و دکمه ذخیره را فشار دهید</h2>
+                <form action="/user.do" method="post">
+                    <label>
+                        <p style="font-size:30px;">user Roles:</p>
+                    </label>
+                    <select name="userRoles">
+                        <option value="admin">admin</option>
+                        <option value="customer">customer</option>
+                        <option value="employee">employee</option>
+                    </select>
+                    <input type="text" name="name" placeholder="name">
+                    <input type="text" name="family" placeholder="Family">
+                    <input type="text" name="username" placeholder="username">
+                    <input type="password" name="password" placeholder="password">
+                    <input type="text" name="discription" placeholder="discription">
+                    <input type="submit" value="save">
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th>User Role</th>
+                <th>ID</th>
+                <th>UserName</th>
+                <th>Name</th>
+                <th>Family</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% for (User user : UserService.getService().findAll()) { %>
+            <tr>
+                <td><%= user.getUserRoles() %></td>
+                <td><%= user.getId() %></td>
+                <td><%= user.getUserName() %></td>
+                <td><%= user.getName() %></td>
+                <td><%= user.getFamily() %></td>
+            </tr>
+            <% } %>
+        </tbody>
+    </table>
+</body>
+</html>
