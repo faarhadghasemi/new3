@@ -13,16 +13,32 @@ import java.io.IOException;
 @WebServlet(name = "login",urlPatterns = "/login.do")
 public class loginServlet extends HttpServlet {
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doget(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try {
             User user = User.builder()
                     .userName(req.getParameter("username"))
                     .password(req.getParameter("password"))
                     .build();
-            System.out.println(UserService.getService().save(user) + "Saved");
+            UserService.getService().login(user.getUserName(), user.getPassword());
+
+        }catch (Exception e){
+            e.getMessage();
         }
-        catch (Exception e){
-            System.out.println(e.getMessage());
-        }
+
+        ;
     }
+    //    @Override
+//    protected void doget(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+//        try {
+//            User user = User.builder()
+//                    .userName(req.getParameter("username"))
+//                    .password(req.getParameter("password"))
+//                    .build();
+//            System.out.println(UserService.getService().save(user) + "Saved");
+//        }
+//        catch (Exception e){
+//            System.out.println(e.getMessage());
+//            resp.sendRedirect("/Customer1.jsp");
+//        }
+//    }
 }

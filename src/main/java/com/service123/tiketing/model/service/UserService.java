@@ -70,9 +70,12 @@ public class UserService implements ServiceImpl<User> {
             return repository.findById(id);
         }
     }
-    public User login (User user) throws Exception{
-        try (UserRepository repository=new UserRepository()){
-            return repository.login(user);
+    public String login (String username,String password) throws Exception{
+        try (UserRepository userRepository = new UserRepository()) {
+            if (login(username,password)!=null){
+                System.out.println("login successful");
+
+            }else System.out.println("login fail");
 
         }
     }

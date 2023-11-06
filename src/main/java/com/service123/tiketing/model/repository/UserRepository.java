@@ -143,7 +143,8 @@ public class UserRepository implements RepositoryImpl<User> {
     }
 
     @Override
-    public User findById(long id) throws Exception { connection= Jdbc.getJdbc().getConnection();
+    public User findById(long id) throws Exception {
+        connection= Jdbc.getJdbc().getConnection();
         statement=connection.prepareStatement(
                 "SELECT * FROM USER_TBL WHERE ID=? AND DELETED=0"
         );
@@ -170,35 +171,38 @@ public class UserRepository implements RepositoryImpl<User> {
         return user;
     }
 
-    public User login(User user) throws Exception {
+    public String login(String username,String password) throws Exception {
         connection= Jdbc.getJdbc().getConnection();
         statement=connection.prepareStatement(
                 "SELECT * FROM USER_TBL WHERE USERNAME=? AND PASSWORD=?"
         );
-        statement.setString(1, user.getUserName());
-        statement.setString(2, user.getPassword());
+        statement.setString(1,username);
+        statement.setString(2, password);
         ResultSet resultSet=statement.executeQuery();
-         user=null;
-        if (resultSet.next()){
-            user=User
-                    .builder()
-                    .id(resultSet.getLong("ID"))
-                    .userRoles(UserRoles.valueOf(resultSet.getString("User_Role")))
-                    .name(resultSet.getString("NAME"))
-                    .family(resultSet.getString("FAMILY"))
-                    .userName(resultSet.getString("USER_NAME"))
-                    .password(resultSet.getString("PASSWORD"))
-                    .active(resultSet.getBoolean("ACTIVE"))
-                    .deleted(resultSet.getBoolean("DELETED"))
-                    .build();
-
-        }
-        if (user==null){
+        resultSet.next();
+        if (username ==null){
             throw new ContentNotFoundException("No User Found");
         }
-        return user;
+        return username;
     }
 
+//    public boolean findByUserName(String username) throws Exception {
+//        connection= Jdbc.getJdbc().getConnection();
+//        statement=connection.prepareStatement(
+//                "SELECT * FROM USER_TBL WHERE USERNAME=? AND PASSWORD=?"
+//        );
+//        statement.setString(1, username);
+//        statement.setString(2, password);
+//        ResultSet resultSet=statement.executeQuery();
+//        resultSet.next();
+//        User user = null;
+//        if (username ==null){
+//            throw new ContentNotFoundException("No UserName Found");
+//        }
+//
+//        return (username);
+//    }
+//
 
     @Override
     public void close() throws Exception {
