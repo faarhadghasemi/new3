@@ -35,14 +35,22 @@ public class UserServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-       ActionType action=null;
-       String data=null;
+//        System.out.println((request.getParameter("name")));
+//        System.out.println((request.getParameter("family")));
+//        System.out.println((request.getParameter("username")));
+//        System.out.println((request.getParameter("password")));
+//    }
+//}
+
+
+
+        ActionType action=null;
+        String data=null;
         UserRoles userRoles;
 
         try {
             data= UserService.getService().save(User
                     .builder()
-                    .id(Long.parseLong(request.getParameter("id")))
                     .userRoles(UserRoles.valueOf(request.getParameter("userRoles")))
                     .name(request.getParameter("name"))
                     .family(request.getParameter("family"))
@@ -57,13 +65,16 @@ public class UserServlet extends HttpServlet {
         }catch (Exception e){
             data=e.getMessage();
             action=ActionType.ERROR;
-        }finally {
-            try {LogDa.log(action,data,1);}
+        }
+        finally {
+            try {
+
+                LogDa.log(action,data,1);}
             catch (Exception e){
                 System.out.println("ERROR CONNECTING LOG SERVER");
             }
         }
-        response.sendRedirect("/userIndex.jsp");
+        response.sendRedirect("/Customer1.jsp");
     }//:SAVE METHOD;
 
     @Override
@@ -79,7 +90,6 @@ public class UserServlet extends HttpServlet {
                             .family(req.getParameter("family"))
                             .userName(req.getParameter("username"))
                             .password(req.getParameter("password"))
-                            .description(req.getParameter("description"))
                             .deleted(false)
                             .build()));
 

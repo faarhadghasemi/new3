@@ -18,9 +18,6 @@ public class User {
     private String family;
     private String userName;
     private String password;
-    private String description;
-//    private boolean isDuplicated;
-//    private String log;
     private boolean active;
     private boolean deleted;
 

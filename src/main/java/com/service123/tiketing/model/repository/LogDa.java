@@ -13,7 +13,7 @@ public class LogDa {
     public static void log(ActionType actionType,String data,long userId) throws SQLException{
         Connection connection= Jdbc.getJdbc().getConnection();
         PreparedStatement statement= connection.prepareStatement(
-                "INSERT  INTO LOG_TBL(ID,ACTION,DATA,DATE_TIME,USER_ID) VALUES  (LOG_SEQ.NEXTVAL,?,?,?,?)"
+                "INSERT  INTO LOG_TBL(ID,ACTION,DATA,DATA_TIME,LOG_ID) VALUES  (LOG_SEQ.NEXTVAL,?,?,?,?)"
         );
         statement.setString(1,actionType.name());
         statement.setString(2,data);

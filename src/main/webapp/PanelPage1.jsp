@@ -1,0 +1,136 @@
+<%--
+  Created by IntelliJ IDEA.
+  User: FH
+  Date: 11/5/2023
+  Time: 11:27 AM
+  To change this template use File | Settings | File Templates.
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page import="com.service123.tiketing.model.entity.User" %>
+<%@ page import="com.service123.tiketing.model.service.UserService" %>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="assets/PanelPage1/css/style1.css">
+  <title>داشبورد کاربری تیکت</title>
+  <link rel="stylesheet" href="style1.css">
+  <link rel="stylesheet" href="assets/css/style1.css">
+  <script src="assets/js/js.js"></script>
+  <style>
+
+    table {
+      font-family: arial, sans-serif;
+      border-collapse: collapse;
+      width: 100%;
+    }
+
+    td, th {
+      border: 1px solid #dddddd;
+      text-align: right;
+      padding: 10px;
+    }
+
+    tr:nth-child(even) {
+      background-color: #dddddd;
+    }
+  </style>
+</head>
+<body>
+<div class="top">
+  <h1>داشبورد کاربری</h1>
+</div>
+
+<div class="content-container">
+
+
+  <div class="form-container" >
+    <div class="myform">
+      <h2>لطفا با توجه به وضعیت پیام ها ی کاربران پیام های بدون پاسخ را پاسخ دهید</h2>
+
+
+      </head>
+      <body>
+      <h2>جدول پیام های کاربران</h2>
+
+      <h2>شرح:</h2>
+
+      <table style="width: 100%;">
+        <tr>
+          <th>شماره</th>
+          <th>نام کاربری</th>
+          <th>موضوع پیام</th>
+          <th>متن پیام</th>
+          <th>وضعیت پیام</th>
+          <th>تخصیص به خود</th>
+        </tr>
+        <tr>
+          <td>1</td>
+          <td>کاربر1</td>
+          <td>موضوع پیام 1</td>
+          <td>متن پیام 1</td>
+          <td>وضعیت پیام 1</td>
+          <td><input type="submit" value="پاسخ"></td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td>کاربر2</td>
+          <td>موضوع پیام 2</td>
+          <td>متن پیام 2</td>
+          <td>وضعیت پیام 2</td>
+          <td><input type="submit" value="پاسخ"></td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td>کاربر3</td>
+          <td>موضوع پیام 3</td>
+          <td>متن پیام 3</td>
+          <td>وضعیت پیام 3</td>
+          <td><input type="submit" value="پاسخ"></td>
+        </tr>
+        <tr>
+          <td>4</td>
+          <td>کاربر4</td>
+          <td>موضوع پیام 4</td>
+          <td>متن پیام 4</td>
+          <td>وضعیت پیام 4</td>
+          <td><input type="submit" value="پاسخ"></td>
+        </tr>
+        <tr>
+          <td>5</td>
+          <td>کاربر5</td>
+          <td>موضوع پیام 5</td>
+          <td>متن پیام 5</td>
+          <td>وضعیت پیام 5</td>
+          <td><input type="submit" value="پاسخ"></td>
+        </tr>
+        <tr>
+          <td>6</td>
+          <td>کاربر6</td>
+          <td>موضوع پیام 6</td>
+          <td>متن پیام 6</td>
+          <td>وضعیت پیام 6</td>
+          <td><input type="submit" value="پاسخ"></td>
+        </tr>
+      </table>
+
+    </div>
+  </div>
+</div>
+</body>
+
+<tbody>
+<% for (User user : UserService.getService().findAll()) { %>
+<tr>
+  <td><%= user.getUserRoles() %></td>
+  <td><%= user.getId() %></td>
+  <td><%= user.getUserName() %></td>
+  <td><%= user.getName() %></td>
+  <td><%= user.getFamily() %></td>
+</tr>
+<% } %>
+</tbody>
+
+</body>
+</html>
+

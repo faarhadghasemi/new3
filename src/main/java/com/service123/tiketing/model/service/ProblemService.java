@@ -8,7 +8,7 @@ import com.service123.tiketing.model.service.impl.ServiceImpl;
 import java.util.List;
 
 public class ProblemService implements ServiceImpl<Problem> {
-    private static ProblemService problemService = new ProblemService();
+    private static final ProblemService problemService = new ProblemService();
 
     public ProblemService() {
     }
@@ -25,28 +25,28 @@ public class ProblemService implements ServiceImpl<Problem> {
         }
     }
 
-
+    //-------------------------------------------------------------------------
         @Override
         public Problem edit (Problem problem) throws Exception {
             try (ProblemRepository problemRepository = new ProblemRepository()) {
                 return problemRepository.edit(problem);
             }
         }
-
+    //-------------------------------------------------------------------------
         @Override
         public Problem remove ( long id) throws Exception {
             try (ProblemRepository problemRepository = new ProblemRepository()) {
                   return problemRepository.remove(id);
             }
         }
-
+    //-------------------------------------------------------------------------
         @Override
         public List<Problem> findAll () throws Exception {
             try (ProblemRepository problemRepository = new ProblemRepository()) {
                 return problemRepository.findAll();
             }
         }
-
+    //-------------------------------------------------------------------------
         @Override
         public Problem findById ( long id) throws Exception {
             try (ProblemRepository problemRepository = new ProblemRepository()) {

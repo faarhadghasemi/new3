@@ -73,7 +73,7 @@ problem.setId(Jdbc.getJdbc().nextId("PROBLEM_SEQ"));
         }
         return problem;
     }
-
+//    ------------------------------------------------------------------------
     @Override
     public Problem remove(long id) throws Exception {
         Problem problem=null;
@@ -108,7 +108,7 @@ problem.setId(Jdbc.getJdbc().nextId("PROBLEM_SEQ"));
 
         return problem;
     }
-
+//    -------------------------------------------------------------------------------------
     @Override
     public List<Problem> findAll() throws Exception {
         Problem problem=null;
@@ -133,11 +133,11 @@ problem.setId(Jdbc.getJdbc().nextId("PROBLEM_SEQ"));
             problemList.add(problem);
         }
         if(problemList.isEmpty())
-            throw new ContentNotFoundException("problem noy found");
+            throw new ContentNotFoundException("problem not found");
         return problemList;
     }
 
-
+//    ----------------------------------------------------------------------------------------------------------------
     @Override
     public Problem findById(long id) throws Exception {
 
@@ -166,7 +166,7 @@ problem.setId(Jdbc.getJdbc().nextId("PROBLEM_SEQ"));
         return problem;
     }
 
-
+//    ---------------------------------------------------------------------------------
     public Problem findByParentId(long parentId) throws Exception {
 
         connection = Jdbc.getJdbc().getConnection();

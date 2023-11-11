@@ -20,7 +20,7 @@
             <div class="slider-tab"></div>
         </div>
         <div class="form-inner">
-            <form action="/user.do" method="get" class="login">
+            <form action="/login.do" method="post" class="login">
                 <div class="field">
                     <input type="text"  name="username" placeholder="Username" required>
                 </div>
@@ -32,11 +32,14 @@
                     <div class="btn-layer"></div>
                     <input type="submit" value="Login">
                 </div>
-                <div class="signup-link">Not a member? <a href="">Signup now</a></div>
+                <div class="signup-link">Not a member? <a href="/user.do">Signup now</a></div>
             </form>
             <form action="/user.do" method="post" class="signup">
                 <div class="field">
-                    <input type="text" name="userRoles" placeholder="UserRole" required>
+                    <select id="userRoles" name="userRoles">
+                        <option value="admin">admin</option>
+                        <option value="customer">customer</option>
+                    </select>
                 </div>
                 <div class="field">
                     <input type="text" name="name" placeholder="Name" required>

@@ -2,8 +2,10 @@ package com.service123.tiketing.model;
 
 import com.service123.tiketing.model.entity.Problem;
 import com.service123.tiketing.model.entity.User;
+import com.service123.tiketing.model.entity.enums.ActionType;
 import com.service123.tiketing.model.entity.enums.ProblemStatus;
 import com.service123.tiketing.model.entity.enums.UserRoles;
+import com.service123.tiketing.model.repository.LogDa;
 import com.service123.tiketing.model.repository.ProblemRepository;
 import com.service123.tiketing.model.repository.UserRepository;
 import com.service123.tiketing.model.service.ProblemService;
@@ -13,14 +15,18 @@ import java.time.LocalDate;
 
 public class test {
     public static void main(String[] args) throws Exception {
-//        User user = User.builder()
+
+
+
+
+//        LogDa.log(ActionType.ERROR,UserService.getService().save(User.builder()
 //                .userRoles(UserRoles.admin)
-//                .name("ali")
-//                .family("molaee")
-//                .userName("ali123")
-//                .password("123ali")
-//                .build();
-//
+//                .name("bb")
+//                .family("bb")
+//                .userName("bbbbbb")
+//                .password("b123")
+//                .build()).toString(),1);
+
 //        System.out.println(UserService.getService().save(user));
 //        System.out.println(UserService.getService().remove(7));
 //        System.out.println(UserService.getService().edit(user));
