@@ -180,8 +180,8 @@ public class UserRepository implements RepositoryImpl<User> {
         statement.setString(1, username);
         statement.setString(2, password);
         ResultSet resultSet = statement.executeQuery();
-        resultSet.next();
-        return (username != null);
+        boolean next = resultSet.next();
+        return (next);
     }
 //-------------------------------------------------------------------------
 //    public boolean findByUserName(String username) throws Exception {
