@@ -35,10 +35,10 @@ public class UserServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        System.out.println((request.getParameter("name")));
-        System.out.println((request.getParameter("family")));
-        System.out.println((request.getParameter("username")));
-        System.out.println((request.getParameter("password")));
+//        System.out.println((request.getParameter("name")));
+//        System.out.println((request.getParameter("family")));
+//        System.out.println((request.getParameter("username")));
+//        System.out.println((request.getParameter("password")));
 //    }
 //}
 
