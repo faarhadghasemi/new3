@@ -22,9 +22,10 @@ public class UserRepository implements RepositoryImpl<User> {
         user.setActive(true);
         user.setDeleted(false);
         user.setId(Jdbc.getJdbc().nextId("USER_SEQ"));
+        user.setUserRoles(UserRoles.customer);
         connection = Jdbc.getJdbc().getConnection();
         statement = connection.prepareStatement(
-            "INSERT INTO USER_TBL (ID,USER_ROLES,NAME,FAMILY,USERNAME,PASSWORD,ACTIVE,DELETED) VALUES (?,?,?,?,?,?,?,?) "
+                "INSERT INTO USER_TBL (ID,USER_ROLES,NAME,FAMILY,USERNAME,PASSWORD,ACTIVE,DELETED) VALUES (?,?,?,?,?,?,?,?) "
         );
         statement.setLong(1, user.getId());
         statement.setString(2, user.getUserRoles().toString());
@@ -140,7 +141,7 @@ public class UserRepository implements RepositoryImpl<User> {
         ResultSet resultSet = statement.executeQuery();
         resultSet.next();
         int count = resultSet.getInt("C");
-        return (count == 0) ? false : true;
+        return count != 0;
     }
     //-------------------------------------------------------------------------
     @Override
@@ -180,8 +181,8 @@ public class UserRepository implements RepositoryImpl<User> {
         statement.setString(1, username);
         statement.setString(2, password);
         ResultSet resultSet = statement.executeQuery();
-        boolean next = resultSet.next();
-        return (next);
+        resultSet.next();
+        return (resultSet.next());
     }
 //-------------------------------------------------------------------------
 //    public boolean findByUserName(String username) throws Exception {
