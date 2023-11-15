@@ -15,19 +15,25 @@ import java.time.LocalDate;
 
 public class test {
     public static void main(String[] args) throws Exception {
-
-
-
+//
+User user=User.builder()
+        .name("yyyyy")
+        .family("yyyy")
+        .userName("yyyyy")
+        .password("y123")
+        .build();
+UserService.getService().save(user);
+        System.out.println(user);
 
 //        LogDa.log(ActionType.ERROR,UserService.getService().save(User.builder()
+//        User user =UserService.getService().save(User.builder()
 //                .userRoles(UserRoles.admin)
 //                .name("bb")
 //                .family("bb")
 //                .userName("bbbbbb")
 //                .password("b123")
 //                .build()).toString(),1);
-
-//        System.out.println(UserService.getService().save(user));
+//
 //        System.out.println(UserService.getService().remove(7));
 //        System.out.println(UserService.getService().edit(user));
 //        System.out.println(UserService.getService().findById(21));

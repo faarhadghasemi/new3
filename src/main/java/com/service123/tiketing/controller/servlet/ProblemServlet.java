@@ -16,23 +16,25 @@ import java.util.List;
 @WebServlet(name ="problem", urlPatterns = "/problem.do")
 
 public class ProblemServlet extends HttpServlet {
+    ProblemService service =ProblemService.getProblemService();
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-      ActionType action = null;
-        String data = null;
-        try {
-            data = ProblemService.getProblemService().save(
-                    Problem.builder()
-                            .description(req.getParameter("description"))
-                            .deleted(false)
-                            .build()
-            ).toString();
-            action= ActionType.SAVE;
-        }
-        catch (Exception e){
-            data = e.getMessage();
-            action = ActionType.ERROR;
-        }
+        System.out.println(req.getParameter("description"));
+//      ActionType action;
+//
+//        try {
+//            Problem problem = Problem.builder()
+//                            .description(req.getParameter("description"))
+//                            .build();
+//            ProblemService.getProblemService().save(problem);
+//            action= ActionType.SAVE;
+//            System.out.println(problem);
+//            resp.sendRedirect("/PanelPage.jsp");
+//        }
+//        catch (Exception e){
+//            System.out.println(e.getMessage());
+//            action = ActionType.ERROR;
+//        }
     }
 
     @Override

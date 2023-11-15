@@ -1,7 +1,7 @@
 package com.service123.tiketing.controller.servlet;
 
 import com.service123.tiketing.model.entity.User;
-import com.service123.tiketing.model.entity.UserDto;
+
 import com.service123.tiketing.model.service.UserService;
 
 import javax.servlet.ServletException;

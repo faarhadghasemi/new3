@@ -26,12 +26,16 @@
         <div class="form-container">
             <div class="myform">
                 <h2>لطفا مشکل خود را به صورت کامل توضیح دهید و دکمه ثبت را بفشارید</h2>
-                <form action="/user.do" method="post">
+                <form action="/problem.do" method="post" class="Save-problem">
                     <label>
                         <p style="font-size:30px;">کاربر شماره1</p>
                     </label>
-                    <input type="text" name="subject" placeholder="موضوع">
-					<textarea name="description" placeholder="متن توضیحات" rows="10"></textarea>
+                    <label>
+                        <input type="text" name="subject" placeholder="موضوع">
+                    </label>
+                    <label>
+                        <textarea name="description" placeholder="متن توضیحات" >
+                    </label>
                     <input type="submit" value="ثبت">
                 </form>
             </div>

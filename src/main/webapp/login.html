@@ -22,6 +22,12 @@
         <div class="form-inner">
             <form action="/login.do" method="post" class="login">
                 <div class="field">
+                    <select id="userRoles" name="userRoles">
+                        <option value="admin">admin</option>
+                        <option value="customer">customer</option>
+                    </select>
+                </div>
+                <div class="field">
                     <input type="text"  name="username" placeholder="Username" required>
                 </div>
                 <div class="field">
@@ -35,12 +41,6 @@
                 <div class="signup-link">Not a member? <a href="/user.do">Signup now</a></div>
             </form>
             <form action="/user.do" method="post" class="signup">
-                <div class="field">
-                    <select id="userRoles" name="userRoles">
-                        <option value="admin">admin</option>
-                        <option value="customer">customer</option>
-                    </select>
-                </div>
                 <div class="field">
                     <input type="text" name="name" placeholder="Name" required>
                 </div>
