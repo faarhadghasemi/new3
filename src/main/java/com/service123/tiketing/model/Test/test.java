@@ -16,14 +16,14 @@ import java.time.LocalDate;
 public class test {
     public static void main(String[] args) throws Exception {
 //
-User user=User.builder()
-        .name("yyyyy")
-        .family("yyyy")
-        .userName("yyyyy")
-        .password("y123")
-        .build();
-UserService.getService().save(user);
-        System.out.println(user);
+//User user=User.builder()
+//        .name("yyyyy")
+//        .family("yyyy")
+//        .userName("yyyyy")
+//        .password("y123")
+//        .build();
+//UserService.getService().save(user);
+//        System.out.println(user);
 
 //        LogDa.log(ActionType.ERROR,UserService.getService().save(User.builder()
 //        User user =UserService.getService().save(User.builder()
