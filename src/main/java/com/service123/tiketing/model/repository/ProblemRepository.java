@@ -20,20 +20,22 @@ public class ProblemRepository implements RepositoryImpl<Problem> {
 
     @Override
     public Problem save(Problem problem) throws Exception {
-problem.setId(Jdbc.getJdbc().nextId("PROBLEM_SEQ"));
+        problem.setDeleted(false);
+        problem.setStatus(ProblemStatus.Pending);
+        problem.setId(Jdbc.getJdbc().nextId("PROBLEM_SEQ"));
         connection = Jdbc.getJdbc().getConnection();
         statement = connection.prepareStatement(
-                "INSERT INTO PROBLEM_TBL (ID,PARENT_ID,DESCRIPTION,date_Time,sender,receiver,answer,status,deleted) values (?,?,?,?,?,?,?,?,?) "
+                "INSERT INTO PROBLEM_TBL (ID,DESCRIPTION,date_Time,sender,receiver,answer,status,PARENT_ID,deleted) values (?,?,?,?,?,?,?,?,?) "
         );
         statement.setLong(1, problem.getId());
-        statement.setLong(2, (problem.getParentId()==null)?0:problem.getParentId());
-        statement.setString(3, problem.getDescription());
+        statement.setString(2, problem.getDescription());
         LocalDateTime localDateTime = java.time.LocalDateTime.now();
-        statement.setTimestamp(4, Timestamp.valueOf(localDateTime));
-        statement.setString(5, problem.getSender().getUserName());
-        statement.setString(6,problem.getReceiver().getUserName());
-        statement.setString(7, problem.getAnswer());
-        statement.setString(8, problem.getStatus().toString());
+        statement.setTimestamp(3, Timestamp.valueOf(localDateTime));
+        statement.setString(4, problem.getSender().getUserName());
+        statement.setString(5,problem.getReceiver().getUserName());
+        statement.setString(6, problem.getAnswer());
+        statement.setString(7, problem.getStatus().toString());
+        statement.setLong(8, (problem.getParentId()==null)?0:problem.getParentId());
         statement.setBoolean(9, problem.isDeleted());
         statement.execute();
 

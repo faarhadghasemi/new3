@@ -15,6 +15,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 @WebServlet(urlPatterns = "/user.do")
 public class UserServlet extends HttpServlet {
@@ -35,29 +37,21 @@ public class UserServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//        System.out.println((request.getParameter("name")));
-//        System.out.println((request.getParameter("family")));
-//        System.out.println((request.getParameter("username")));
-//        System.out.println((request.getParameter("password")));
-//    }
-//}
-
-
-
         ActionType action=null;
         String data=null;
         UserRoles userRoles;
 
         try {
-            data= UserService.getService().save(User
-                    .builder()
-                    .name(request.getParameter("name"))
-                    .family(request.getParameter("family"))
-                    .userName(request.getParameter("username"))
-                    .password(request.getParameter("password"))
-                    .deleted(false)
-                    .build()
-            ).toString();
+                data= UserService.getService().save(User
+                        .builder()
+                        .name(request.getParameter("name"))
+                        .family(request.getParameter("family"))
+                        .userName(request.getParameter("username"))
+                        .password(request.getParameter("password"))
+                        .deleted(false)
+                        .build()
+                ).toString();
+
             action= ActionType.SAVE;
             System.out.println(data);
 

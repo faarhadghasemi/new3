@@ -1,8 +1,10 @@
 package com.service123.tiketing.controller.servlet;
 
 import com.service123.tiketing.model.entity.Problem;
+import com.service123.tiketing.model.entity.User;
 import com.service123.tiketing.model.entity.enums.ActionType;
 import com.service123.tiketing.model.service.ProblemService;
+import com.service123.tiketing.model.service.UserService;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,6 +12,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,21 +23,29 @@ public class ProblemServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         System.out.println(req.getParameter("description"));
-//      ActionType action;
-//
-//        try {
-//            Problem problem = Problem.builder()
-//                            .description(req.getParameter("description"))
-//                            .build();
-//            ProblemService.getProblemService().save(problem);
-//            action= ActionType.SAVE;
-//            System.out.println(problem);
-//            resp.sendRedirect("/PanelPage.jsp");
-//        }
-//        catch (Exception e){
-//            System.out.println(e.getMessage());
-//            action = ActionType.ERROR;
-//        }
+        ActionType action;
+      String data;
+        User user =null;
+        try {
+
+            data = ProblemService.getProblemService().save(
+                    Problem.builder()
+                            .description(req.getParameter("description"))
+                            .dateTime(LocalDate.now())
+                            .sender(User.builder().userName("qaz").build())
+                            .receiver(User.builder().userName("farhad").build())
+                            .deleted(false)
+                            .build()
+            ).toString();
+
+            action= ActionType.SAVE;
+            System.out.println(data);
+            resp.sendRedirect("/PanelPage1.jsp");
+        }
+        catch (Exception e){
+            data=e.getMessage();
+            action = ActionType.ERROR;
+        }
     }
 
     @Override
