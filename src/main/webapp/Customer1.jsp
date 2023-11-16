@@ -31,7 +31,7 @@
     <div class="form-container">
         <div class="myform">
             <h2>لطفا مشکل خود را به صورت کامل توضیح دهید و دکمه ثبت رو بزنید</h2>
-            <form action="/user.do" method="post">
+            <form action="/problem.do" method="post" class="Save-Problem">
                 <label>
                     <p style="font-size:30px;">کاربر شماره1</p>
                 </label>
