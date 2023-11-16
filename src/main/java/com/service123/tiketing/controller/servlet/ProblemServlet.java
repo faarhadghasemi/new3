@@ -22,7 +22,6 @@ public class ProblemServlet extends HttpServlet {
     ProblemService service =ProblemService.getProblemService();
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        System.out.println(req.getParameter("description"));
         ActionType action;
       String data;
         User user =null;
