@@ -1,4 +1,4 @@
-package com.service123.tiketing.model;
+package com.service123.tiketing.model.Test;
 
 import com.service123.tiketing.model.entity.Problem;
 import com.service123.tiketing.model.entity.User;
