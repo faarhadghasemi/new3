@@ -157,7 +157,7 @@ public class UserRepository implements RepositoryImpl<User> {
             user = User
                 .builder()
                 .id(resultSet.getLong("ID"))
-                .userRoles(UserRoles.valueOf(resultSet.getString("User_Role")))
+                .userRoles(UserRoles.valueOf(resultSet.getString("USER_ROLES")))
                 .name(resultSet.getString("NAME"))
                 .family(resultSet.getString("FAMILY"))
                 .userName(resultSet.getString("USERNAME"))
@@ -185,23 +185,36 @@ public class UserRepository implements RepositoryImpl<User> {
         return (next);
     }
 //-------------------------------------------------------------------------
-//    public boolean findByUserName(String username) throws Exception {
-//        connection= Jdbc.getJdbc().getConnection();
-//        statement=connection.prepareStatement(
-//                "SELECT * FROM USER_TBL WHERE USERNAME=? AND PASSWORD=?"
-//        );
-//        statement.setString(1, username);
-//        statement.setString(2, password);
-//        ResultSet resultSet=statement.executeQuery();
-//        resultSet.next();
-//        User user = null;
-//        if (username ==null){
-//            throw new ContentNotFoundException("No UserName Found");
-//        }
-//
-//        return (username);
-//    }
-//
+    public User findByUserName(String username) throws Exception, ContentNotFoundException {
+        User user = null;
+        connection= Jdbc.getJdbc().getConnection();
+        statement=connection.prepareStatement(
+                "SELECT * FROM USER_TBL WHERE USERNAME=? AND DELETED=0"
+        );
+        statement.setString(1, username);
+        ResultSet resultSet=statement.executeQuery();
+
+        if(resultSet.next()){
+            user = User
+                    .builder()
+                    .id(resultSet.getLong("ID"))
+                    .userRoles(UserRoles.valueOf(resultSet.getString("USER_ROLES")))
+                    .name(resultSet.getString("NAME"))
+                    .family(resultSet.getString("FAMILY"))
+                    .userName(resultSet.getString("USERNAME"))
+                    .password(resultSet.getString("PASSWORD"))
+                    .active(resultSet.getBoolean("ACTIVE"))
+                    .deleted(resultSet.getBoolean("DELETED"))
+                    .build();
+        }
+
+        if (username ==null){
+            throw new ContentNotFoundException("No UserName Found");
+        }
+
+        return user;
+    }
+//----------------------------------------------------------------------------------------
 
     @Override
     public void close() throws Exception {

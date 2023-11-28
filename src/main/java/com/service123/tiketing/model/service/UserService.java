@@ -5,6 +5,7 @@ import com.service123.tiketing.model.entity.User;
 import com.service123.tiketing.model.repository.UserRepository;
 import com.service123.tiketing.model.service.impl.ServiceImpl;
 
+import java.sql.SQLException;
 import java.util.List;
 
 public class UserService implements ServiceImpl<User> {
@@ -20,7 +21,7 @@ public class UserService implements ServiceImpl<User> {
     @Override
     public User save(User user) throws Exception {
         try
-            (UserRepository userRepository = new UserRepository()) {
+                (UserRepository userRepository = new UserRepository()) {
             if (userRepository.isDuplicated(user.getUserName())) {
                 throw new DuplicateUserNameException();
             }
@@ -36,6 +37,7 @@ public class UserService implements ServiceImpl<User> {
             return repository.edit(user);
         }
     }
+
     //-------------------------------------------------------------------------
     @Override
     public User remove(long id) throws Exception {
@@ -43,6 +45,7 @@ public class UserService implements ServiceImpl<User> {
             return repository.remove(id);
         }
     }
+
     //-------------------------------------------------------------------------
     @Override
     public List<User> findAll() throws Exception {
@@ -50,6 +53,7 @@ public class UserService implements ServiceImpl<User> {
             return repository.findAll();
         }
     }
+
     //-------------------------------------------------------------------------
     @Override
     public User findById(long id) throws Exception {
@@ -57,10 +61,19 @@ public class UserService implements ServiceImpl<User> {
             return repository.findById(id);
         }
     }
+
     //-------------------------------------------------------------------------
-        public boolean isUserPassCorrect(String username, String password) throws Exception {
-            try(UserRepository repository = new UserRepository()) {
-                return (repository.isUserPassCorrect(username, password));
-            }
+    public boolean isUserPassCorrect(String username, String password) throws Exception {
+        try (UserRepository repository = new UserRepository()) {
+            return (repository.isUserPassCorrect(username, password));
         }
     }
+
+    //-------------------------------------------------------------------------
+    public User findByUserName(String username) throws Exception {
+        try (UserRepository repository = new UserRepository()) {
+            return (repository.findByUserName(username));
+        }
+    }
+}
+

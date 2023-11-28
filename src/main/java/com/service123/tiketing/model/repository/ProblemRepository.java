@@ -20,6 +20,7 @@ public class ProblemRepository implements RepositoryImpl<Problem> {
 
     @Override
     public Problem save(Problem problem) throws Exception {
+        System.out.println("DA-SAVE");
         problem.setDeleted(false);
         problem.setStatus(ProblemStatus.Pending);
         problem.setId(Jdbc.getJdbc().nextId("PROBLEM_SEQ"));

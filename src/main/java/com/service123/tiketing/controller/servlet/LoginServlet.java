@@ -12,19 +12,15 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @WebServlet(name = "login", urlPatterns = "/login.do")
-public class loginServlet extends HttpServlet {
+public class LoginServlet extends HttpServlet {
     UserService service = UserService.getService();
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try {
-            User user = User.builder()
-                .userName(req.getParameter("username"))
-                .password(req.getParameter("password"))
-                .build();
-
-            boolean login = service.isUserPassCorrect(user.getUserName(), user.getPassword());
+            boolean login = service.isUserPassCorrect(req.getParameter("username"), req.getParameter("password"));
             if (login){
+                req.getSession().setAttribute("username",req.getParameter("username"));
                 resp.sendRedirect("/Customer1.jsp");
             } else {
                 resp.sendRedirect("/loginError.jsp");

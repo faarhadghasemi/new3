@@ -3,6 +3,7 @@ package com.service123.tiketing.controller.servlet;
 import com.service123.tiketing.model.entity.Problem;
 import com.service123.tiketing.model.entity.User;
 import com.service123.tiketing.model.entity.enums.ActionType;
+import com.service123.tiketing.model.entity.enums.UserRoles;
 import com.service123.tiketing.model.service.ProblemService;
 import com.service123.tiketing.model.service.UserService;
 
@@ -22,6 +23,7 @@ public class ProblemServlet extends HttpServlet {
     ProblemService service =ProblemService.getProblemService();
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        System.out.println("User :"+req.getSession().getAttribute("username"));
         ActionType action;
       String data;
         User user =null;
@@ -31,8 +33,8 @@ public class ProblemServlet extends HttpServlet {
                     Problem.builder()
                             .description(req.getParameter("description"))
                             .dateTime(LocalDate.now())
-                            .sender(User.builder().userName("qaz").build())
-                            .receiver(User.builder().userName("farhad").build())
+                            .sender(UserService.getService().findByUserName(String.valueOf(req.getSession().getAttribute("username"))))
+                            .receiver(UserService.getService().findByUserName(String.valueOf(req.getSession().getAttribute("username"))))
                             .deleted(false)
                             .build()
             ).toString();
@@ -42,6 +44,7 @@ public class ProblemServlet extends HttpServlet {
             resp.sendRedirect("/PanelPage1.jsp");
         }
         catch (Exception e){
+            e.printStackTrace();
             data=e.getMessage();
             action = ActionType.ERROR;
         }
